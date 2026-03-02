@@ -1,0 +1,1904 @@
+{
+  "meta": {
+    "generated_at": "2026-03-02T06:24:08.452020+00:00",
+    "source": "app.db",
+    "version": 1
+  },
+  "users": [
+    {
+      "name": "Staff Kim",
+      "email": "staff.kim@corp.com",
+      "role": "STAFF",
+      "is_active": true,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 36,
+      "created_at": "2026-01-15T08:49:00.968180"
+    },
+    {
+      "name": "Staff Lee",
+      "email": "staff.lee@corp.com",
+      "role": "STAFF",
+      "is_active": true,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 24,
+      "created_at": "2026-01-22T08:49:00.968180"
+    },
+    {
+      "name": "User Park",
+      "email": "user.park@corp.com",
+      "role": "USER",
+      "is_active": true,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 15,
+      "created_at": "2026-01-30T08:49:00.968180"
+    },
+    {
+      "name": "User Choi",
+      "email": "user.choi@corp.com",
+      "role": "USER",
+      "is_active": true,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 11,
+      "created_at": "2026-02-03T08:49:00.968180"
+    },
+    {
+      "name": "User Jung",
+      "email": "user.jung@corp.com",
+      "role": "USER",
+      "is_active": true,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 8,
+      "created_at": "2026-02-07T08:49:00.968180"
+    },
+    {
+      "name": "User Han",
+      "email": "user.han@corp.com",
+      "role": "USER",
+      "is_active": false,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 6,
+      "created_at": "2026-02-09T08:49:00.968180"
+    },
+    {
+      "name": "User Seo",
+      "email": "user.seo@corp.com",
+      "role": "USER",
+      "is_active": false,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 4,
+      "created_at": "2026-02-13T08:49:00.968180"
+    },
+    {
+      "name": "User Min",
+      "email": "user.min@corp.com",
+      "role": "USER",
+      "is_active": false,
+      "password_hash": "38f4b547b70ee0f4dd930c5e69398cb8$41dba59517d02354764919cbe9c0d130035f7403de25547c91b256552ba6a407",
+      "login_count": 2,
+      "created_at": "2026-02-17T08:49:00.968180"
+    },
+    {
+      "name": "Admin",
+      "email": "admin@corp.com",
+      "role": "ADMIN",
+      "is_active": true,
+      "password_hash": "ffef1e246fe19d1f7796ceb8681c2393$3467eb8179f9291b52f34788767077bfd419a581d8f765aa67c29ec37dc0e65b",
+      "login_count": 33,
+      "created_at": "2026-02-27T14:01:03"
+    },
+    {
+      "name": "Staff",
+      "email": "staff@example.com",
+      "role": "STAFF",
+      "is_active": true,
+      "password_hash": "None",
+      "login_count": 0,
+      "created_at": "2026-02-28T03:17:38"
+    },
+    {
+      "name": "Staff2",
+      "email": "staff2@example.com",
+      "role": "STAFF",
+      "is_active": true,
+      "password_hash": "None",
+      "login_count": 0,
+      "created_at": "2026-02-28T03:18:25"
+    },
+    {
+      "name": "Profile",
+      "email": "profiletest@example.com",
+      "role": "STAFF",
+      "is_active": false,
+      "password_hash": "d0a07c04bf9008cfa9577c6a4c74c470$5c60f2b0dce6eb236696ad3275e298d12b4524bb419eb743a30907c91e2aa45d",
+      "login_count": 3,
+      "created_at": "2026-02-28T07:59:57"
+    },
+    {
+      "name": "테스터01",
+      "email": "test01@efit.co.kr",
+      "role": "USER",
+      "is_active": true,
+      "password_hash": "852b34e537acfe6e251fcfdcdb1a925c$23b10c886602affd9f0c45689267516386258aa144642e31d52e900276a6bc38",
+      "login_count": 2,
+      "created_at": "2026-02-28T15:29:21"
+    }
+  ],
+  "boards": [
+    {
+      "name": "공지사항",
+      "slug": "notice",
+      "description": "사내 공지사항 게시판",
+      "settings_json": {
+        "allowAnonymous": false,
+        "allowAttachment": true,
+        "allowPin": true
+      },
+      "created_at": "2026-02-27T14:01:03"
+    },
+    {
+      "name": "자유",
+      "slug": "free",
+      "description": "자유 게시판",
+      "settings_json": {
+        "allowAnonymous": false,
+        "allowAttachment": true,
+        "allowPin": false
+      },
+      "created_at": "2026-02-27T14:01:03"
+    },
+    {
+      "name": "자료실",
+      "slug": "archive",
+      "description": "자료 공유 게시판",
+      "settings_json": {
+        "allowAnonymous": false,
+        "allowAttachment": true,
+        "allowPin": false
+      },
+      "created_at": "2026-02-27T14:01:03"
+    },
+    {
+      "name": "Q&A",
+      "slug": "qa",
+      "description": "질문과 답변 게시판",
+      "settings_json": {
+        "allowAnonymous": false,
+        "allowAttachment": true,
+        "allowPin": false
+      },
+      "created_at": "2026-02-27T14:01:03"
+    }
+  ],
+  "menu_categories": [
+    {
+      "label": "주요",
+      "order": 1,
+      "is_visible": true
+    },
+    {
+      "label": "게시판",
+      "order": 2,
+      "is_visible": true
+    },
+    {
+      "label": "통계",
+      "order": 3,
+      "is_visible": true
+    },
+    {
+      "label": "관리자",
+      "order": 4,
+      "is_visible": true
+    },
+    {
+      "label": "모니터링",
+      "order": 4,
+      "is_visible": true
+    },
+    {
+      "label": "지원",
+      "order": 5,
+      "is_visible": true
+    }
+  ],
+  "menus": [
+    {
+      "label": "Dashboard",
+      "icon": "layout-dashboard",
+      "type": "internal",
+      "target": "/dashboard",
+      "order": 1,
+      "is_visible": true,
+      "category_label": "주요",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "STAFF,ADMIN"
+    },
+    {
+      "label": "공지사항",
+      "icon": "bell",
+      "type": "board",
+      "target": "/boards/notice",
+      "order": 2,
+      "is_visible": true,
+      "category_label": "게시판",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "STAFF,ADMIN"
+    },
+    {
+      "label": "자유게시판",
+      "icon": "megaphone",
+      "type": "board",
+      "target": "/boards/free",
+      "order": 3,
+      "is_visible": true,
+      "category_label": "게시판",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "USER,STAFF,ADMIN"
+    },
+    {
+      "label": "자료실",
+      "icon": "folder-kanban",
+      "type": "board",
+      "target": "/boards/archive",
+      "order": 4,
+      "is_visible": true,
+      "category_label": "게시판",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "USER,STAFF,ADMIN"
+    },
+    {
+      "label": "로그 모니터링",
+      "icon": "activity",
+      "type": "internal",
+      "target": "/admin/audit-logs",
+      "order": 4,
+      "is_visible": true,
+      "category_label": "관리자",
+      "is_admin_only": true,
+      "read_roles": "ADMIN",
+      "write_roles": "ADMIN"
+    },
+    {
+      "label": "아질게",
+      "icon": "help-circle",
+      "type": "board",
+      "target": "/boards/qa",
+      "order": 5,
+      "is_visible": true,
+      "category_label": "게시판",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "USER,STAFF,ADMIN"
+    },
+    {
+      "label": "게시판 관리",
+      "icon": "layout-grid",
+      "type": "internal",
+      "target": "/admin/boards",
+      "order": 6,
+      "is_visible": true,
+      "category_label": "관리자",
+      "is_admin_only": true,
+      "read_roles": "ADMIN",
+      "write_roles": "ADMIN"
+    },
+    {
+      "label": "메뉴 관리",
+      "icon": "menu-square",
+      "type": "internal",
+      "target": "/admin/menus",
+      "order": 7,
+      "is_visible": true,
+      "category_label": "관리자",
+      "is_admin_only": true,
+      "read_roles": "ADMIN",
+      "write_roles": "ADMIN"
+    },
+    {
+      "label": "사용자 관리",
+      "icon": "users-round",
+      "type": "internal",
+      "target": "/admin/users",
+      "order": 8,
+      "is_visible": true,
+      "category_label": "관리자",
+      "is_admin_only": true,
+      "read_roles": "ADMIN",
+      "write_roles": "ADMIN"
+    },
+    {
+      "label": "통계모니터링",
+      "icon": "chart-column",
+      "type": "internal",
+      "target": "/stats/monitoring",
+      "order": 9,
+      "is_visible": true,
+      "category_label": "통계",
+      "is_admin_only": true,
+      "read_roles": "ADMIN",
+      "write_roles": "ADMIN"
+    },
+    {
+      "label": "Support",
+      "icon": "life-buoy",
+      "type": "external",
+      "target": "mailto:support@corp.local",
+      "order": 10,
+      "is_visible": true,
+      "category_label": "지원",
+      "is_admin_only": false,
+      "read_roles": "USER,STAFF,ADMIN",
+      "write_roles": "STAFF,ADMIN"
+    }
+  ],
+  "posts": [
+    {
+      "source_id": 1,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "Smoke Post",
+      "content": "Hello",
+      "is_pinned": true,
+      "view_count": 11,
+      "created_at": "2026-02-27T14:01:59",
+      "updated_at": "2026-02-28T16:10:37"
+    },
+    {
+      "source_id": 2,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "자료실 테스트 01",
+      "content": "자료실 테스트 01",
+      "is_pinned": false,
+      "view_count": 21,
+      "created_at": "2026-02-28T13:17:35",
+      "updated_at": "2026-02-28T16:10:40"
+    },
+    {
+      "source_id": 3,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "AttachTest",
+      "content": "body",
+      "is_pinned": false,
+      "view_count": 5,
+      "created_at": "2026-02-28T13:23:48",
+      "updated_at": "2026-03-02T02:46:56"
+    },
+    {
+      "source_id": 4,
+      "board_slug": "free",
+      "author_email": "test01@efit.co.kr",
+      "title": "가입인사 합니다.",
+      "content": "가입인사 합니다.",
+      "is_pinned": false,
+      "view_count": 2,
+      "created_at": "2026-02-28T15:30:11",
+      "updated_at": "2026-02-28T16:00:26"
+    },
+    {
+      "source_id": 5,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 30일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=0, idx=0).",
+      "is_pinned": true,
+      "view_count": 119,
+      "created_at": "2026-03-01T07:49:00.968180",
+      "updated_at": "2026-03-01T10:51:05"
+    },
+    {
+      "source_id": 6,
+      "board_slug": "free",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 29일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=1, idx=0).",
+      "is_pinned": false,
+      "view_count": 114,
+      "created_at": "2026-02-28T07:49:00.968180",
+      "updated_at": "2026-02-28T07:49:00.968180"
+    },
+    {
+      "source_id": 7,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 29일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=1, idx=1).",
+      "is_pinned": false,
+      "view_count": 116,
+      "created_at": "2026-02-28T06:49:00.968180",
+      "updated_at": "2026-02-28T06:49:00.968180"
+    },
+    {
+      "source_id": 8,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 28일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=2, idx=0).",
+      "is_pinned": false,
+      "view_count": 111,
+      "created_at": "2026-02-27T07:49:00.968180",
+      "updated_at": "2026-02-27T07:49:00.968180"
+    },
+    {
+      "source_id": 9,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 28일차 샘플 게시글 2",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=2, idx=1).",
+      "is_pinned": false,
+      "view_count": 113,
+      "created_at": "2026-02-27T06:49:00.968180",
+      "updated_at": "2026-02-27T06:49:00.968180"
+    },
+    {
+      "source_id": 10,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 28일차 샘플 게시글 3",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=2, idx=2).",
+      "is_pinned": false,
+      "view_count": 115,
+      "created_at": "2026-02-27T05:49:00.968180",
+      "updated_at": "2026-02-27T05:49:00.968180"
+    },
+    {
+      "source_id": 11,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 27일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=3, idx=0).",
+      "is_pinned": false,
+      "view_count": 108,
+      "created_at": "2026-02-26T07:49:00.968180",
+      "updated_at": "2026-02-26T07:49:00.968180"
+    },
+    {
+      "source_id": 12,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 26일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=4, idx=0).",
+      "is_pinned": false,
+      "view_count": 105,
+      "created_at": "2026-02-25T07:49:00.968180",
+      "updated_at": "2026-02-25T07:49:00.968180"
+    },
+    {
+      "source_id": 13,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 26일차 샘플 게시글 2",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=4, idx=1).",
+      "is_pinned": false,
+      "view_count": 108,
+      "created_at": "2026-02-25T06:49:00.968180",
+      "updated_at": "2026-03-01T08:59:48"
+    },
+    {
+      "source_id": 14,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 25일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=5, idx=0).",
+      "is_pinned": false,
+      "view_count": 102,
+      "created_at": "2026-02-24T07:49:00.968180",
+      "updated_at": "2026-02-24T07:49:00.968180"
+    },
+    {
+      "source_id": 15,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 25일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=5, idx=1).",
+      "is_pinned": false,
+      "view_count": 104,
+      "created_at": "2026-02-24T06:49:00.968180",
+      "updated_at": "2026-02-24T06:49:00.968180"
+    },
+    {
+      "source_id": 16,
+      "board_slug": "qa",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 25일차 샘플 게시글 3",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=5, idx=2).",
+      "is_pinned": false,
+      "view_count": 106,
+      "created_at": "2026-02-24T05:49:00.968180",
+      "updated_at": "2026-02-24T05:49:00.968180"
+    },
+    {
+      "source_id": 17,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 24일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=6, idx=0).",
+      "is_pinned": false,
+      "view_count": 100,
+      "created_at": "2026-02-23T07:49:00.968180",
+      "updated_at": "2026-03-01T08:59:52"
+    },
+    {
+      "source_id": 18,
+      "board_slug": "qa",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 23일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=7, idx=0).",
+      "is_pinned": false,
+      "view_count": 96,
+      "created_at": "2026-02-22T07:49:00.968180",
+      "updated_at": "2026-02-22T07:49:00.968180"
+    },
+    {
+      "source_id": 19,
+      "board_slug": "notice",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 23일차 샘플 게시글 2",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=7, idx=1).",
+      "is_pinned": false,
+      "view_count": 98,
+      "created_at": "2026-02-22T06:49:00.968180",
+      "updated_at": "2026-02-22T06:49:00.968180"
+    },
+    {
+      "source_id": 20,
+      "board_slug": "notice",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 22일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=8, idx=0).",
+      "is_pinned": true,
+      "view_count": 94,
+      "created_at": "2026-02-21T07:49:00.968180",
+      "updated_at": "2026-03-02T02:47:16"
+    },
+    {
+      "source_id": 21,
+      "board_slug": "free",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 22일차 샘플 게시글 2",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=8, idx=1).",
+      "is_pinned": false,
+      "view_count": 96,
+      "created_at": "2026-02-21T06:49:00.968180",
+      "updated_at": "2026-03-01T10:51:09"
+    },
+    {
+      "source_id": 22,
+      "board_slug": "archive",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 22일차 샘플 게시글 3",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=8, idx=2).",
+      "is_pinned": false,
+      "view_count": 97,
+      "created_at": "2026-02-21T05:49:00.968180",
+      "updated_at": "2026-02-21T05:49:00.968180"
+    },
+    {
+      "source_id": 23,
+      "board_slug": "free",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 21일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=9, idx=0).",
+      "is_pinned": false,
+      "view_count": 90,
+      "created_at": "2026-02-20T07:49:00.968180",
+      "updated_at": "2026-02-20T07:49:00.968180"
+    },
+    {
+      "source_id": 24,
+      "board_slug": "archive",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 20일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=10, idx=0).",
+      "is_pinned": false,
+      "view_count": 87,
+      "created_at": "2026-02-19T07:49:00.968180",
+      "updated_at": "2026-02-19T07:49:00.968180"
+    },
+    {
+      "source_id": 25,
+      "board_slug": "qa",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 20일차 샘플 게시글 2",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=10, idx=1).",
+      "is_pinned": false,
+      "view_count": 90,
+      "created_at": "2026-02-19T06:49:00.968180",
+      "updated_at": "2026-03-01T10:16:49"
+    },
+    {
+      "source_id": 26,
+      "board_slug": "qa",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 19일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=11, idx=0).",
+      "is_pinned": false,
+      "view_count": 84,
+      "created_at": "2026-02-18T07:49:00.968180",
+      "updated_at": "2026-02-18T07:49:00.968180"
+    },
+    {
+      "source_id": 27,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 19일차 샘플 게시글 2",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=11, idx=1).",
+      "is_pinned": false,
+      "view_count": 86,
+      "created_at": "2026-02-18T06:49:00.968180",
+      "updated_at": "2026-02-18T06:49:00.968180"
+    },
+    {
+      "source_id": 28,
+      "board_slug": "free",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 19일차 샘플 게시글 3",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=11, idx=2).",
+      "is_pinned": false,
+      "view_count": 88,
+      "created_at": "2026-02-18T05:49:00.968180",
+      "updated_at": "2026-02-18T05:49:00.968180"
+    },
+    {
+      "source_id": 29,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 18일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=12, idx=0).",
+      "is_pinned": false,
+      "view_count": 81,
+      "created_at": "2026-02-17T07:49:00.968180",
+      "updated_at": "2026-02-17T07:49:00.968180"
+    },
+    {
+      "source_id": 30,
+      "board_slug": "free",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 17일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=13, idx=0).",
+      "is_pinned": false,
+      "view_count": 78,
+      "created_at": "2026-02-16T07:49:00.968180",
+      "updated_at": "2026-02-16T07:49:00.968180"
+    },
+    {
+      "source_id": 31,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 17일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=13, idx=1).",
+      "is_pinned": false,
+      "view_count": 80,
+      "created_at": "2026-02-16T06:49:00.968180",
+      "updated_at": "2026-02-16T06:49:00.968180"
+    },
+    {
+      "source_id": 32,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 16일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=14, idx=0).",
+      "is_pinned": false,
+      "view_count": 75,
+      "created_at": "2026-02-15T07:49:00.968180",
+      "updated_at": "2026-02-15T07:49:00.968180"
+    },
+    {
+      "source_id": 33,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 16일차 샘플 게시글 2",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=14, idx=1).",
+      "is_pinned": false,
+      "view_count": 77,
+      "created_at": "2026-02-15T06:49:00.968180",
+      "updated_at": "2026-02-15T06:49:00.968180"
+    },
+    {
+      "source_id": 34,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 16일차 샘플 게시글 3",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=14, idx=2).",
+      "is_pinned": false,
+      "view_count": 79,
+      "created_at": "2026-02-15T05:49:00.968180",
+      "updated_at": "2026-02-15T05:49:00.968180"
+    },
+    {
+      "source_id": 35,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 15일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=15, idx=0).",
+      "is_pinned": false,
+      "view_count": 73,
+      "created_at": "2026-02-14T07:49:00.968180",
+      "updated_at": "2026-03-01T10:16:45"
+    },
+    {
+      "source_id": 36,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 14일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=16, idx=0).",
+      "is_pinned": true,
+      "view_count": 69,
+      "created_at": "2026-02-13T07:49:00.968180",
+      "updated_at": "2026-02-13T07:49:00.968180"
+    },
+    {
+      "source_id": 37,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 14일차 샘플 게시글 2",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=16, idx=1).",
+      "is_pinned": false,
+      "view_count": 71,
+      "created_at": "2026-02-13T06:49:00.968180",
+      "updated_at": "2026-02-13T06:49:00.968180"
+    },
+    {
+      "source_id": 38,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 13일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=17, idx=0).",
+      "is_pinned": false,
+      "view_count": 66,
+      "created_at": "2026-02-12T07:49:00.968180",
+      "updated_at": "2026-02-12T07:49:00.968180"
+    },
+    {
+      "source_id": 39,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 13일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=17, idx=1).",
+      "is_pinned": false,
+      "view_count": 69,
+      "created_at": "2026-02-12T06:49:00.968180",
+      "updated_at": "2026-03-01T10:16:40"
+    },
+    {
+      "source_id": 40,
+      "board_slug": "qa",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 13일차 샘플 게시글 3",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=17, idx=2).",
+      "is_pinned": false,
+      "view_count": 70,
+      "created_at": "2026-02-12T05:49:00.968180",
+      "updated_at": "2026-02-12T05:49:00.968180"
+    },
+    {
+      "source_id": 41,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 12일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=18, idx=0).",
+      "is_pinned": false,
+      "view_count": 63,
+      "created_at": "2026-02-11T07:49:00.968180",
+      "updated_at": "2026-02-11T07:49:00.968180"
+    },
+    {
+      "source_id": 42,
+      "board_slug": "qa",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 11일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=19, idx=0).",
+      "is_pinned": false,
+      "view_count": 60,
+      "created_at": "2026-02-10T07:49:00.968180",
+      "updated_at": "2026-02-10T07:49:00.968180"
+    },
+    {
+      "source_id": 43,
+      "board_slug": "notice",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 11일차 샘플 게시글 2",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=19, idx=1).",
+      "is_pinned": false,
+      "view_count": 62,
+      "created_at": "2026-02-10T06:49:00.968180",
+      "updated_at": "2026-02-10T06:49:00.968180"
+    },
+    {
+      "source_id": 44,
+      "board_slug": "notice",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 10일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=20, idx=0).",
+      "is_pinned": false,
+      "view_count": 57,
+      "created_at": "2026-02-09T07:49:00.968180",
+      "updated_at": "2026-02-09T07:49:00.968180"
+    },
+    {
+      "source_id": 45,
+      "board_slug": "free",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 10일차 샘플 게시글 2",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=20, idx=1).",
+      "is_pinned": false,
+      "view_count": 59,
+      "created_at": "2026-02-09T06:49:00.968180",
+      "updated_at": "2026-02-09T06:49:00.968180"
+    },
+    {
+      "source_id": 46,
+      "board_slug": "archive",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 10일차 샘플 게시글 3",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=20, idx=2).",
+      "is_pinned": false,
+      "view_count": 61,
+      "created_at": "2026-02-09T05:49:00.968180",
+      "updated_at": "2026-02-09T05:49:00.968180"
+    },
+    {
+      "source_id": 47,
+      "board_slug": "free",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 09일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=21, idx=0).",
+      "is_pinned": false,
+      "view_count": 54,
+      "created_at": "2026-02-08T07:49:00.968180",
+      "updated_at": "2026-02-08T07:49:00.968180"
+    },
+    {
+      "source_id": 48,
+      "board_slug": "archive",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 08일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=22, idx=0).",
+      "is_pinned": false,
+      "view_count": 51,
+      "created_at": "2026-02-07T07:49:00.968180",
+      "updated_at": "2026-02-07T07:49:00.968180"
+    },
+    {
+      "source_id": 49,
+      "board_slug": "qa",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 08일차 샘플 게시글 2",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=22, idx=1).",
+      "is_pinned": false,
+      "view_count": 53,
+      "created_at": "2026-02-07T06:49:00.968180",
+      "updated_at": "2026-02-07T06:49:00.968180"
+    },
+    {
+      "source_id": 50,
+      "board_slug": "qa",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 07일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=23, idx=0).",
+      "is_pinned": false,
+      "view_count": 48,
+      "created_at": "2026-02-06T07:49:00.968180",
+      "updated_at": "2026-02-06T07:49:00.968180"
+    },
+    {
+      "source_id": 51,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 07일차 샘플 게시글 2",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=23, idx=1).",
+      "is_pinned": false,
+      "view_count": 50,
+      "created_at": "2026-02-06T06:49:00.968180",
+      "updated_at": "2026-02-06T06:49:00.968180"
+    },
+    {
+      "source_id": 52,
+      "board_slug": "free",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 07일차 샘플 게시글 3",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=23, idx=2).",
+      "is_pinned": false,
+      "view_count": 52,
+      "created_at": "2026-02-06T05:49:00.968180",
+      "updated_at": "2026-02-06T05:49:00.968180"
+    },
+    {
+      "source_id": 53,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 06일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=24, idx=0).",
+      "is_pinned": true,
+      "view_count": 45,
+      "created_at": "2026-02-05T07:49:00.968180",
+      "updated_at": "2026-02-05T07:49:00.968180"
+    },
+    {
+      "source_id": 54,
+      "board_slug": "free",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 05일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=25, idx=0).",
+      "is_pinned": false,
+      "view_count": 42,
+      "created_at": "2026-02-04T07:49:00.968180",
+      "updated_at": "2026-02-04T07:49:00.968180"
+    },
+    {
+      "source_id": 55,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 05일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=25, idx=1).",
+      "is_pinned": false,
+      "view_count": 44,
+      "created_at": "2026-02-04T06:49:00.968180",
+      "updated_at": "2026-02-04T06:49:00.968180"
+    },
+    {
+      "source_id": 56,
+      "board_slug": "archive",
+      "author_email": "staff.lee@corp.com",
+      "title": "[SEED-STATS] 04일차 샘플 게시글 1",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=26, idx=0).",
+      "is_pinned": false,
+      "view_count": 39,
+      "created_at": "2026-02-03T07:49:00.968180",
+      "updated_at": "2026-02-03T07:49:00.968180"
+    },
+    {
+      "source_id": 57,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 04일차 샘플 게시글 2",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=26, idx=1).",
+      "is_pinned": false,
+      "view_count": 41,
+      "created_at": "2026-02-03T06:49:00.968180",
+      "updated_at": "2026-02-03T06:49:00.968180"
+    },
+    {
+      "source_id": 58,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 04일차 샘플 게시글 3",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=26, idx=2).",
+      "is_pinned": false,
+      "view_count": 43,
+      "created_at": "2026-02-03T05:49:00.968180",
+      "updated_at": "2026-02-03T05:49:00.968180"
+    },
+    {
+      "source_id": 59,
+      "board_slug": "qa",
+      "author_email": "user.park@corp.com",
+      "title": "[SEED-STATS] 03일차 샘플 게시글 1",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=27, idx=0).",
+      "is_pinned": false,
+      "view_count": 36,
+      "created_at": "2026-02-02T07:49:00.968180",
+      "updated_at": "2026-02-02T07:49:00.968180"
+    },
+    {
+      "source_id": 60,
+      "board_slug": "notice",
+      "author_email": "user.choi@corp.com",
+      "title": "[SEED-STATS] 02일차 샘플 게시글 1",
+      "content": "공지사항 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=28, idx=0).",
+      "is_pinned": false,
+      "view_count": 33,
+      "created_at": "2026-02-01T07:49:00.968180",
+      "updated_at": "2026-02-01T07:49:00.968180"
+    },
+    {
+      "source_id": 61,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 02일차 샘플 게시글 2",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=28, idx=1).",
+      "is_pinned": false,
+      "view_count": 35,
+      "created_at": "2026-02-01T06:49:00.968180",
+      "updated_at": "2026-02-01T06:49:00.968180"
+    },
+    {
+      "source_id": 62,
+      "board_slug": "free",
+      "author_email": "user.jung@corp.com",
+      "title": "[SEED-STATS] 01일차 샘플 게시글 1",
+      "content": "자유 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=29, idx=0).",
+      "is_pinned": false,
+      "view_count": 30,
+      "created_at": "2026-01-31T07:49:00.968180",
+      "updated_at": "2026-01-31T07:49:00.968180"
+    },
+    {
+      "source_id": 63,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "[SEED-STATS] 01일차 샘플 게시글 2",
+      "content": "자료실 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=29, idx=1).",
+      "is_pinned": false,
+      "view_count": 32,
+      "created_at": "2026-01-31T06:49:00.968180",
+      "updated_at": "2026-01-31T06:49:00.968180"
+    },
+    {
+      "source_id": 64,
+      "board_slug": "qa",
+      "author_email": "staff.kim@corp.com",
+      "title": "[SEED-STATS] 01일차 샘플 게시글 3",
+      "content": "Q&A 게시판 테스트 데이터입니다.\n통계 모니터링 화면 검증용 게시글 (day=29, idx=2).",
+      "is_pinned": false,
+      "view_count": 34,
+      "created_at": "2026-01-31T05:49:00.968180",
+      "updated_at": "2026-01-31T05:49:00.968180"
+    },
+    {
+      "source_id": 65,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "Smoke Post",
+      "content": "Hello",
+      "is_pinned": true,
+      "view_count": 11,
+      "created_at": "2026-02-27T14:01:59",
+      "updated_at": "2026-02-28T16:10:37"
+    },
+    {
+      "source_id": 66,
+      "board_slug": "archive",
+      "author_email": "admin@corp.com",
+      "title": "자료실 테스트 01",
+      "content": "자료실 테스트 01",
+      "is_pinned": false,
+      "view_count": 21,
+      "created_at": "2026-02-28T13:17:35",
+      "updated_at": "2026-02-28T16:10:40"
+    },
+    {
+      "source_id": 67,
+      "board_slug": "notice",
+      "author_email": "admin@corp.com",
+      "title": "AttachTest",
+      "content": "body",
+      "is_pinned": false,
+      "view_count": 5,
+      "created_at": "2026-02-28T13:23:48",
+      "updated_at": "2026-03-02T02:46:56"
+    },
+    {
+      "source_id": 68,
+      "board_slug": "free",
+      "author_email": "test01@efit.co.kr",
+      "title": "가입인사 합니다.",
+      "content": "가입인사 합니다.",
+      "is_pinned": false,
+      "view_count": 2,
+      "created_at": "2026-02-28T15:30:11",
+      "updated_at": "2026-02-28T16:00:26"
+    }
+  ],
+  "comments": [
+    {
+      "source_id": 1,
+      "post_source_id": 1,
+      "author_email": "admin@corp.com",
+      "content": "first",
+      "created_at": "2026-02-27T14:02:00",
+      "updated_at": "2026-02-27T14:02:00"
+    },
+    {
+      "source_id": 2,
+      "post_source_id": 2,
+      "author_email": "admin@corp.com",
+      "content": "댓글 테스트",
+      "created_at": "2026-02-28T13:30:47",
+      "updated_at": "2026-02-28T13:30:47"
+    },
+    {
+      "source_id": 3,
+      "post_source_id": 6,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=6)",
+      "created_at": "2026-02-28T08:49:00.968180",
+      "updated_at": "2026-02-28T08:49:00.968180"
+    },
+    {
+      "source_id": 4,
+      "post_source_id": 7,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=7)",
+      "created_at": "2026-02-28T07:49:00.968180",
+      "updated_at": "2026-02-28T07:49:00.968180"
+    },
+    {
+      "source_id": 5,
+      "post_source_id": 7,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=7)",
+      "created_at": "2026-02-28T08:49:00.968180",
+      "updated_at": "2026-02-28T08:49:00.968180"
+    },
+    {
+      "source_id": 6,
+      "post_source_id": 8,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=8)",
+      "created_at": "2026-02-27T08:49:00.968180",
+      "updated_at": "2026-02-27T08:49:00.968180"
+    },
+    {
+      "source_id": 7,
+      "post_source_id": 8,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=8)",
+      "created_at": "2026-02-27T09:49:00.968180",
+      "updated_at": "2026-02-27T09:49:00.968180"
+    },
+    {
+      "source_id": 8,
+      "post_source_id": 9,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=9)",
+      "created_at": "2026-02-27T07:49:00.968180",
+      "updated_at": "2026-02-27T07:49:00.968180"
+    },
+    {
+      "source_id": 9,
+      "post_source_id": 9,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=9)",
+      "created_at": "2026-02-27T08:49:00.968180",
+      "updated_at": "2026-02-27T08:49:00.968180"
+    },
+    {
+      "source_id": 10,
+      "post_source_id": 9,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=9)",
+      "created_at": "2026-02-27T09:49:00.968180",
+      "updated_at": "2026-02-27T09:49:00.968180"
+    },
+    {
+      "source_id": 11,
+      "post_source_id": 11,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=11)",
+      "created_at": "2026-02-26T08:49:00.968180",
+      "updated_at": "2026-02-26T08:49:00.968180"
+    },
+    {
+      "source_id": 12,
+      "post_source_id": 11,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=11)",
+      "created_at": "2026-02-26T09:49:00.968180",
+      "updated_at": "2026-02-26T09:49:00.968180"
+    },
+    {
+      "source_id": 13,
+      "post_source_id": 11,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=11)",
+      "created_at": "2026-02-26T10:49:00.968180",
+      "updated_at": "2026-02-26T10:49:00.968180"
+    },
+    {
+      "source_id": 14,
+      "post_source_id": 13,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=13)",
+      "created_at": "2026-02-25T07:49:00.968180",
+      "updated_at": "2026-02-25T07:49:00.968180"
+    },
+    {
+      "source_id": 15,
+      "post_source_id": 14,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=14)",
+      "created_at": "2026-02-24T08:49:00.968180",
+      "updated_at": "2026-02-24T08:49:00.968180"
+    },
+    {
+      "source_id": 16,
+      "post_source_id": 15,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 1 (post=15)",
+      "created_at": "2026-02-24T07:49:00.968180",
+      "updated_at": "2026-02-24T07:49:00.968180"
+    },
+    {
+      "source_id": 17,
+      "post_source_id": 15,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 2 (post=15)",
+      "created_at": "2026-02-24T08:49:00.968180",
+      "updated_at": "2026-02-24T08:49:00.968180"
+    },
+    {
+      "source_id": 18,
+      "post_source_id": 16,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=16)",
+      "created_at": "2026-02-24T06:49:00.968180",
+      "updated_at": "2026-02-24T06:49:00.968180"
+    },
+    {
+      "source_id": 19,
+      "post_source_id": 16,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 2 (post=16)",
+      "created_at": "2026-02-24T07:49:00.968180",
+      "updated_at": "2026-02-24T07:49:00.968180"
+    },
+    {
+      "source_id": 20,
+      "post_source_id": 16,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 3 (post=16)",
+      "created_at": "2026-02-24T08:49:00.968180",
+      "updated_at": "2026-02-24T08:49:00.968180"
+    },
+    {
+      "source_id": 21,
+      "post_source_id": 17,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 1 (post=17)",
+      "created_at": "2026-02-23T08:49:00.968180",
+      "updated_at": "2026-02-23T08:49:00.968180"
+    },
+    {
+      "source_id": 22,
+      "post_source_id": 17,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 2 (post=17)",
+      "created_at": "2026-02-23T09:49:00.968180",
+      "updated_at": "2026-02-23T09:49:00.968180"
+    },
+    {
+      "source_id": 23,
+      "post_source_id": 18,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=18)",
+      "created_at": "2026-02-22T08:49:00.968180",
+      "updated_at": "2026-02-22T08:49:00.968180"
+    },
+    {
+      "source_id": 24,
+      "post_source_id": 18,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 2 (post=18)",
+      "created_at": "2026-02-22T09:49:00.968180",
+      "updated_at": "2026-02-22T09:49:00.968180"
+    },
+    {
+      "source_id": 25,
+      "post_source_id": 18,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 3 (post=18)",
+      "created_at": "2026-02-22T10:49:00.968180",
+      "updated_at": "2026-02-22T10:49:00.968180"
+    },
+    {
+      "source_id": 26,
+      "post_source_id": 21,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=21)",
+      "created_at": "2026-02-21T07:49:00.968180",
+      "updated_at": "2026-02-21T07:49:00.968180"
+    },
+    {
+      "source_id": 27,
+      "post_source_id": 22,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 1 (post=22)",
+      "created_at": "2026-02-21T06:49:00.968180",
+      "updated_at": "2026-02-21T06:49:00.968180"
+    },
+    {
+      "source_id": 28,
+      "post_source_id": 22,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 2 (post=22)",
+      "created_at": "2026-02-21T07:49:00.968180",
+      "updated_at": "2026-02-21T07:49:00.968180"
+    },
+    {
+      "source_id": 29,
+      "post_source_id": 23,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=23)",
+      "created_at": "2026-02-20T08:49:00.968180",
+      "updated_at": "2026-02-20T08:49:00.968180"
+    },
+    {
+      "source_id": 30,
+      "post_source_id": 24,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 1 (post=24)",
+      "created_at": "2026-02-19T08:49:00.968180",
+      "updated_at": "2026-02-19T08:49:00.968180"
+    },
+    {
+      "source_id": 31,
+      "post_source_id": 24,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 2 (post=24)",
+      "created_at": "2026-02-19T09:49:00.968180",
+      "updated_at": "2026-02-19T09:49:00.968180"
+    },
+    {
+      "source_id": 32,
+      "post_source_id": 25,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=25)",
+      "created_at": "2026-02-19T07:49:00.968180",
+      "updated_at": "2026-02-19T07:49:00.968180"
+    },
+    {
+      "source_id": 33,
+      "post_source_id": 25,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 2 (post=25)",
+      "created_at": "2026-02-19T08:49:00.968180",
+      "updated_at": "2026-02-19T08:49:00.968180"
+    },
+    {
+      "source_id": 34,
+      "post_source_id": 25,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 3 (post=25)",
+      "created_at": "2026-02-19T09:49:00.968180",
+      "updated_at": "2026-02-19T09:49:00.968180"
+    },
+    {
+      "source_id": 35,
+      "post_source_id": 26,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=26)",
+      "created_at": "2026-02-18T08:49:00.968180",
+      "updated_at": "2026-02-18T08:49:00.968180"
+    },
+    {
+      "source_id": 36,
+      "post_source_id": 26,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 2 (post=26)",
+      "created_at": "2026-02-18T09:49:00.968180",
+      "updated_at": "2026-02-18T09:49:00.968180"
+    },
+    {
+      "source_id": 37,
+      "post_source_id": 26,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 3 (post=26)",
+      "created_at": "2026-02-18T10:49:00.968180",
+      "updated_at": "2026-02-18T10:49:00.968180"
+    },
+    {
+      "source_id": 38,
+      "post_source_id": 28,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=28)",
+      "created_at": "2026-02-18T06:49:00.968180",
+      "updated_at": "2026-02-18T06:49:00.968180"
+    },
+    {
+      "source_id": 39,
+      "post_source_id": 30,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=30)",
+      "created_at": "2026-02-16T08:49:00.968180",
+      "updated_at": "2026-02-16T08:49:00.968180"
+    },
+    {
+      "source_id": 40,
+      "post_source_id": 31,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=31)",
+      "created_at": "2026-02-16T07:49:00.968180",
+      "updated_at": "2026-02-16T07:49:00.968180"
+    },
+    {
+      "source_id": 41,
+      "post_source_id": 31,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=31)",
+      "created_at": "2026-02-16T08:49:00.968180",
+      "updated_at": "2026-02-16T08:49:00.968180"
+    },
+    {
+      "source_id": 42,
+      "post_source_id": 32,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=32)",
+      "created_at": "2026-02-15T08:49:00.968180",
+      "updated_at": "2026-02-15T08:49:00.968180"
+    },
+    {
+      "source_id": 43,
+      "post_source_id": 32,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=32)",
+      "created_at": "2026-02-15T09:49:00.968180",
+      "updated_at": "2026-02-15T09:49:00.968180"
+    },
+    {
+      "source_id": 44,
+      "post_source_id": 33,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=33)",
+      "created_at": "2026-02-15T07:49:00.968180",
+      "updated_at": "2026-02-15T07:49:00.968180"
+    },
+    {
+      "source_id": 45,
+      "post_source_id": 33,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=33)",
+      "created_at": "2026-02-15T08:49:00.968180",
+      "updated_at": "2026-02-15T08:49:00.968180"
+    },
+    {
+      "source_id": 46,
+      "post_source_id": 33,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=33)",
+      "created_at": "2026-02-15T09:49:00.968180",
+      "updated_at": "2026-02-15T09:49:00.968180"
+    },
+    {
+      "source_id": 47,
+      "post_source_id": 35,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=35)",
+      "created_at": "2026-02-14T08:49:00.968180",
+      "updated_at": "2026-02-14T08:49:00.968180"
+    },
+    {
+      "source_id": 48,
+      "post_source_id": 35,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=35)",
+      "created_at": "2026-02-14T09:49:00.968180",
+      "updated_at": "2026-02-14T09:49:00.968180"
+    },
+    {
+      "source_id": 49,
+      "post_source_id": 35,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=35)",
+      "created_at": "2026-02-14T10:49:00.968180",
+      "updated_at": "2026-02-14T10:49:00.968180"
+    },
+    {
+      "source_id": 50,
+      "post_source_id": 37,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=37)",
+      "created_at": "2026-02-13T07:49:00.968180",
+      "updated_at": "2026-02-13T07:49:00.968180"
+    },
+    {
+      "source_id": 51,
+      "post_source_id": 38,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=38)",
+      "created_at": "2026-02-12T08:49:00.968180",
+      "updated_at": "2026-02-12T08:49:00.968180"
+    },
+    {
+      "source_id": 52,
+      "post_source_id": 39,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 1 (post=39)",
+      "created_at": "2026-02-12T07:49:00.968180",
+      "updated_at": "2026-02-12T07:49:00.968180"
+    },
+    {
+      "source_id": 53,
+      "post_source_id": 39,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 2 (post=39)",
+      "created_at": "2026-02-12T08:49:00.968180",
+      "updated_at": "2026-02-12T08:49:00.968180"
+    },
+    {
+      "source_id": 54,
+      "post_source_id": 40,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=40)",
+      "created_at": "2026-02-12T06:49:00.968180",
+      "updated_at": "2026-02-12T06:49:00.968180"
+    },
+    {
+      "source_id": 55,
+      "post_source_id": 40,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 2 (post=40)",
+      "created_at": "2026-02-12T07:49:00.968180",
+      "updated_at": "2026-02-12T07:49:00.968180"
+    },
+    {
+      "source_id": 56,
+      "post_source_id": 40,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 3 (post=40)",
+      "created_at": "2026-02-12T08:49:00.968180",
+      "updated_at": "2026-02-12T08:49:00.968180"
+    },
+    {
+      "source_id": 57,
+      "post_source_id": 41,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 1 (post=41)",
+      "created_at": "2026-02-11T08:49:00.968180",
+      "updated_at": "2026-02-11T08:49:00.968180"
+    },
+    {
+      "source_id": 58,
+      "post_source_id": 41,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 2 (post=41)",
+      "created_at": "2026-02-11T09:49:00.968180",
+      "updated_at": "2026-02-11T09:49:00.968180"
+    },
+    {
+      "source_id": 59,
+      "post_source_id": 42,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=42)",
+      "created_at": "2026-02-10T08:49:00.968180",
+      "updated_at": "2026-02-10T08:49:00.968180"
+    },
+    {
+      "source_id": 60,
+      "post_source_id": 42,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 2 (post=42)",
+      "created_at": "2026-02-10T09:49:00.968180",
+      "updated_at": "2026-02-10T09:49:00.968180"
+    },
+    {
+      "source_id": 61,
+      "post_source_id": 42,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 3 (post=42)",
+      "created_at": "2026-02-10T10:49:00.968180",
+      "updated_at": "2026-02-10T10:49:00.968180"
+    },
+    {
+      "source_id": 62,
+      "post_source_id": 45,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=45)",
+      "created_at": "2026-02-09T07:49:00.968180",
+      "updated_at": "2026-02-09T07:49:00.968180"
+    },
+    {
+      "source_id": 63,
+      "post_source_id": 46,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 1 (post=46)",
+      "created_at": "2026-02-09T06:49:00.968180",
+      "updated_at": "2026-02-09T06:49:00.968180"
+    },
+    {
+      "source_id": 64,
+      "post_source_id": 46,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 2 (post=46)",
+      "created_at": "2026-02-09T07:49:00.968180",
+      "updated_at": "2026-02-09T07:49:00.968180"
+    },
+    {
+      "source_id": 65,
+      "post_source_id": 47,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=47)",
+      "created_at": "2026-02-08T08:49:00.968180",
+      "updated_at": "2026-02-08T08:49:00.968180"
+    },
+    {
+      "source_id": 66,
+      "post_source_id": 48,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 1 (post=48)",
+      "created_at": "2026-02-07T08:49:00.968180",
+      "updated_at": "2026-02-07T08:49:00.968180"
+    },
+    {
+      "source_id": 67,
+      "post_source_id": 48,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 2 (post=48)",
+      "created_at": "2026-02-07T09:49:00.968180",
+      "updated_at": "2026-02-07T09:49:00.968180"
+    },
+    {
+      "source_id": 68,
+      "post_source_id": 49,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=49)",
+      "created_at": "2026-02-07T07:49:00.968180",
+      "updated_at": "2026-02-07T07:49:00.968180"
+    },
+    {
+      "source_id": 69,
+      "post_source_id": 49,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 2 (post=49)",
+      "created_at": "2026-02-07T08:49:00.968180",
+      "updated_at": "2026-02-07T08:49:00.968180"
+    },
+    {
+      "source_id": 70,
+      "post_source_id": 49,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 3 (post=49)",
+      "created_at": "2026-02-07T09:49:00.968180",
+      "updated_at": "2026-02-07T09:49:00.968180"
+    },
+    {
+      "source_id": 71,
+      "post_source_id": 50,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=50)",
+      "created_at": "2026-02-06T08:49:00.968180",
+      "updated_at": "2026-02-06T08:49:00.968180"
+    },
+    {
+      "source_id": 72,
+      "post_source_id": 50,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 2 (post=50)",
+      "created_at": "2026-02-06T09:49:00.968180",
+      "updated_at": "2026-02-06T09:49:00.968180"
+    },
+    {
+      "source_id": 73,
+      "post_source_id": 50,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 3 (post=50)",
+      "created_at": "2026-02-06T10:49:00.968180",
+      "updated_at": "2026-02-06T10:49:00.968180"
+    },
+    {
+      "source_id": 74,
+      "post_source_id": 52,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=52)",
+      "created_at": "2026-02-06T06:49:00.968180",
+      "updated_at": "2026-02-06T06:49:00.968180"
+    },
+    {
+      "source_id": 75,
+      "post_source_id": 54,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=54)",
+      "created_at": "2026-02-04T08:49:00.968180",
+      "updated_at": "2026-02-04T08:49:00.968180"
+    },
+    {
+      "source_id": 76,
+      "post_source_id": 55,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=55)",
+      "created_at": "2026-02-04T07:49:00.968180",
+      "updated_at": "2026-02-04T07:49:00.968180"
+    },
+    {
+      "source_id": 77,
+      "post_source_id": 55,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=55)",
+      "created_at": "2026-02-04T08:49:00.968180",
+      "updated_at": "2026-02-04T08:49:00.968180"
+    },
+    {
+      "source_id": 78,
+      "post_source_id": 56,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 1 (post=56)",
+      "created_at": "2026-02-03T08:49:00.968180",
+      "updated_at": "2026-02-03T08:49:00.968180"
+    },
+    {
+      "source_id": 79,
+      "post_source_id": 56,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 2 (post=56)",
+      "created_at": "2026-02-03T09:49:00.968180",
+      "updated_at": "2026-02-03T09:49:00.968180"
+    },
+    {
+      "source_id": 80,
+      "post_source_id": 57,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=57)",
+      "created_at": "2026-02-03T07:49:00.968180",
+      "updated_at": "2026-02-03T07:49:00.968180"
+    },
+    {
+      "source_id": 81,
+      "post_source_id": 57,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=57)",
+      "created_at": "2026-02-03T08:49:00.968180",
+      "updated_at": "2026-02-03T08:49:00.968180"
+    },
+    {
+      "source_id": 82,
+      "post_source_id": 57,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=57)",
+      "created_at": "2026-02-03T09:49:00.968180",
+      "updated_at": "2026-02-03T09:49:00.968180"
+    },
+    {
+      "source_id": 83,
+      "post_source_id": 59,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 1 (post=59)",
+      "created_at": "2026-02-02T08:49:00.968180",
+      "updated_at": "2026-02-02T08:49:00.968180"
+    },
+    {
+      "source_id": 84,
+      "post_source_id": 59,
+      "author_email": "user.jung@corp.com",
+      "content": "테스트 댓글 2 (post=59)",
+      "created_at": "2026-02-02T09:49:00.968180",
+      "updated_at": "2026-02-02T09:49:00.968180"
+    },
+    {
+      "source_id": 85,
+      "post_source_id": 59,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 3 (post=59)",
+      "created_at": "2026-02-02T10:49:00.968180",
+      "updated_at": "2026-02-02T10:49:00.968180"
+    },
+    {
+      "source_id": 86,
+      "post_source_id": 61,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=61)",
+      "created_at": "2026-02-01T07:49:00.968180",
+      "updated_at": "2026-02-01T07:49:00.968180"
+    },
+    {
+      "source_id": 87,
+      "post_source_id": 62,
+      "author_email": "admin@corp.com",
+      "content": "테스트 댓글 1 (post=62)",
+      "created_at": "2026-01-31T08:49:00.968180",
+      "updated_at": "2026-01-31T08:49:00.968180"
+    },
+    {
+      "source_id": 88,
+      "post_source_id": 63,
+      "author_email": "staff.kim@corp.com",
+      "content": "테스트 댓글 1 (post=63)",
+      "created_at": "2026-01-31T07:49:00.968180",
+      "updated_at": "2026-01-31T07:49:00.968180"
+    },
+    {
+      "source_id": 89,
+      "post_source_id": 63,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 2 (post=63)",
+      "created_at": "2026-01-31T08:49:00.968180",
+      "updated_at": "2026-01-31T08:49:00.968180"
+    },
+    {
+      "source_id": 90,
+      "post_source_id": 64,
+      "author_email": "staff.lee@corp.com",
+      "content": "테스트 댓글 1 (post=64)",
+      "created_at": "2026-01-31T06:49:00.968180",
+      "updated_at": "2026-01-31T06:49:00.968180"
+    },
+    {
+      "source_id": 91,
+      "post_source_id": 64,
+      "author_email": "user.park@corp.com",
+      "content": "테스트 댓글 2 (post=64)",
+      "created_at": "2026-01-31T07:49:00.968180",
+      "updated_at": "2026-01-31T07:49:00.968180"
+    },
+    {
+      "source_id": 92,
+      "post_source_id": 64,
+      "author_email": "user.choi@corp.com",
+      "content": "테스트 댓글 3 (post=64)",
+      "created_at": "2026-01-31T08:49:00.968180",
+      "updated_at": "2026-01-31T08:49:00.968180"
+    },
+    {
+      "source_id": 93,
+      "post_source_id": 65,
+      "author_email": "admin@corp.com",
+      "content": "first",
+      "created_at": "2026-02-27T14:02:00",
+      "updated_at": "2026-02-27T14:02:00"
+    },
+    {
+      "source_id": 94,
+      "post_source_id": 66,
+      "author_email": "admin@corp.com",
+      "content": "댓글 테스트",
+      "created_at": "2026-02-28T13:30:47",
+      "updated_at": "2026-02-28T13:30:47"
+    },
+    {
+      "source_id": 95,
+      "post_source_id": 1,
+      "author_email": "admin@corp.com",
+      "content": "first",
+      "created_at": "2026-02-27T14:02:00",
+      "updated_at": "2026-02-27T14:02:00"
+    },
+    {
+      "source_id": 96,
+      "post_source_id": 2,
+      "author_email": "admin@corp.com",
+      "content": "댓글 테스트",
+      "created_at": "2026-02-28T13:30:47",
+      "updated_at": "2026-02-28T13:30:47"
+    }
+  ],
+  "attachments": [
+    {
+      "source_id": 1,
+      "post_source_id": 2,
+      "file_name": "standard.js",
+      "mime_type": "text/javascript",
+      "size": 581876,
+      "storage_path": "2/02c750e1493f4823b478dabd4dd2e0bc_standard.js",
+      "created_at": "2026-02-28T13:29:51"
+    },
+    {
+      "source_id": 2,
+      "post_source_id": 66,
+      "file_name": "standard.js",
+      "mime_type": "text/javascript",
+      "size": 581876,
+      "storage_path": "2/02c750e1493f4823b478dabd4dd2e0bc_standard.js",
+      "created_at": "2026-02-28T13:29:51"
+    },
+    {
+      "source_id": 3,
+      "post_source_id": 2,
+      "file_name": "standard.js",
+      "mime_type": "text/javascript",
+      "size": 581876,
+      "storage_path": "2/02c750e1493f4823b478dabd4dd2e0bc_standard.js",
+      "created_at": "2026-02-28T13:29:51"
+    }
+  ],
+  "user_status_events": [
+    {
+      "user_email": "user.han@corp.com",
+      "event_type": "DEACTIVATED",
+      "created_at": "2026-02-17T06:49:00.968180"
+    },
+    {
+      "user_email": "user.seo@corp.com",
+      "event_type": "DEACTIVATED",
+      "created_at": "2026-02-23T06:49:00.968180"
+    },
+    {
+      "user_email": "user.min@corp.com",
+      "event_type": "DEACTIVATED",
+      "created_at": "2026-02-27T06:49:00.968180"
+    }
+  ]
+}

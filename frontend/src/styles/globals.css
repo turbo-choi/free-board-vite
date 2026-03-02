@@ -1,0 +1,52 @@
+@import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.12) 0, transparent 40%),
+      radial-gradient(circle at 88% 12%, rgba(14, 165, 233, 0.14) 0, transparent 34%),
+      linear-gradient(160deg, rgba(15, 23, 42, 1) 0%, rgba(12, 20, 35, 1) 40%, rgba(10, 16, 30, 1) 100%);
+  }
+
+  html.light body {
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.12) 0, transparent 35%),
+      radial-gradient(circle at 90% 14%, rgba(37, 99, 235, 0.1) 0, transparent 30%),
+      linear-gradient(180deg, #f9fbff 0%, #f3f7ff 45%, #eef4ff 100%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+}

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --background: 222 47% 11%;
+  --foreground: 213 31% 94%;
+  --card: 220 34% 18%;
+  --card-foreground: 213 31% 94%;
+  --primary: 198 92% 56%;
+  --primary-foreground: 222 47% 11%;
+  --secondary: 216 30% 22%;
+  --secondary-foreground: 213 31% 94%;
+  --muted: 218 23% 24%;
+  --muted-foreground: 215 16% 65%;
+  --destructive: 0 72% 55%;
+  --destructive-foreground: 213 31% 94%;
+  --border: 215 27% 26%;
+  --input: 215 27% 26%;
+  --ring: 198 92% 56%;
+  --radius: 0.9rem;
+}
+
+:root.light {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --secondary: 210 16% 93%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 16% 93%;
+  --muted-foreground: 215 16% 40%;
+  --border: 214 32% 88%;
+  --input: 214 32% 88%;
+}

@@ -1,0 +1,11 @@
+[project]
+name = "corpboard-backend"
+version = "0.1.0"
+description = "FastAPI backend for CorpBoard"
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
