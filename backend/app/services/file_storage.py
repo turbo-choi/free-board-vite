@@ -6,6 +6,7 @@ from uuid import uuid4
 from fastapi import UploadFile
 
 from app.core.config import settings
+from app.core.exceptions import AppException
 
 
 
@@ -31,10 +32,22 @@ def save_upload_file(post_id: int, file: UploadFile) -> tuple[str, int, str]:
     path = post_dir / stored_name
 
     size = 0
-    with path.open('wb') as target:
-        while chunk := file.file.read(1024 * 1024):
-            size += len(chunk)
-            target.write(chunk)
+    max_upload_bytes = int(settings.max_upload_size_mb) * 1024 * 1024
+    try:
+        with path.open('wb') as target:
+            while chunk := file.file.read(1024 * 1024):
+                next_size = size + len(chunk)
+                if next_size > max_upload_bytes:
+                    raise AppException(
+                        f'Attachment exceeds max size ({settings.max_upload_size_mb}MB).',
+                        'FILE_TOO_LARGE',
+                        413,
+                    )
+                size = next_size
+                target.write(chunk)
+    except Exception:
+        path.unlink(missing_ok=True)
+        raise
 
     mime_type = file.content_type or 'application/octet-stream'
     relative_path = os.path.relpath(path, start=upload_root)
@@ -43,8 +56,13 @@ def save_upload_file(post_id: int, file: UploadFile) -> tuple[str, int, str]:
 
 
 def get_absolute_path(storage_path: str) -> Path:
-    upload_root = ensure_upload_dir()
-    return upload_root / storage_path
+    upload_root = ensure_upload_dir().resolve()
+    resolved = (upload_root / storage_path).resolve()
+    try:
+        resolved.relative_to(upload_root)
+    except ValueError:
+        raise AppException('Invalid storage path', 'INVALID_STORAGE_PATH', 400)
+    return resolved
 
 
 

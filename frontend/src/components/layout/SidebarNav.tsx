@@ -1,10 +1,10 @@
-import { type ComponentType, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
 
 import { EmptyState } from '@/components/common/EmptyState'
+import { MenuIcon } from '@/features/menus/iconRegistry'
 import { useNavigationMenusQuery } from '@/features/menus/queries'
-import { getMenuIcon } from '@/features/menus/iconRegistry'
 import { cn } from '@/lib/utils'
 import type { NavigationMenuGroup, NavigationMenuItem } from '@/types/domain'
 
@@ -14,10 +14,6 @@ interface SidebarNavProps {
   mobileOpen: boolean
   onMobileOpenChange: (open: boolean) => void
   collapsed: boolean
-}
-
-function getIcon(item: NavigationMenuItem): ComponentType<{ className?: string }> {
-  return getMenuIcon(item.icon, item.target, item.type)
 }
 
 function getGroupKey(group: NavigationMenuGroup) {
@@ -69,7 +65,6 @@ function SidebarSection({
 
   function renderMenuItem(item: NavigationMenuItem) {
     const active = pathname === item.target
-    const Icon = getIcon(item)
     const isExternal =
       item.type === 'external' ||
       item.target.startsWith('http://') ||
@@ -94,7 +89,7 @@ function SidebarSection({
           target={item.target.startsWith('mailto:') ? undefined : '_blank'}
           rel={item.target.startsWith('mailto:') ? undefined : 'noreferrer'}
         >
-          <Icon className="h-4 w-4 shrink-0" />
+          <MenuIcon iconKey={item.icon} target={item.target} type={item.type} className="h-4 w-4 shrink-0" />
           {collapsed ? null : <span className="truncate">{item.label}</span>}
         </a>
       )
@@ -108,7 +103,7 @@ function SidebarSection({
         title={collapsed ? item.label : undefined}
         className={itemClassName}
       >
-        <Icon className="h-4 w-4 shrink-0" />
+        <MenuIcon iconKey={item.icon} target={item.target} type={item.type} className="h-4 w-4 shrink-0" />
         {collapsed ? null : <span className="truncate">{item.label}</span>}
       </Link>
     )

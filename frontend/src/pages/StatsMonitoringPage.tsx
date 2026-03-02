@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
 import type { ColumnDef } from '@tanstack/react-table'
 import { BarChart3, FileText, MessageSquareText, UserCheck, UserX } from 'lucide-react'
 
@@ -9,6 +8,7 @@ import { LoadingBlock } from '@/components/common/LoadingBlock'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useStatsMonitoringQuery } from '@/features/stats/queries'
+import { formatApiDate, formatNowKst } from '@/lib/datetime'
 import type { BoardPostCountItem, DailyStatsItem } from '@/types/domain'
 
 const dayOptions = [
@@ -28,7 +28,7 @@ const chartMetricOptions: Array<{ key: ChartMetricKey; label: string; color: str
 
 export function StatsMonitoringPage() {
   const [viewMode, setViewMode] = useState<'month' | 'rolling'>('month')
-  const [selectedMonth, setSelectedMonth] = useState(format(new Date(), 'yyyy-MM'))
+  const [selectedMonth, setSelectedMonth] = useState(formatNowKst('yyyy-MM'))
   const [days, setDays] = useState(30)
   const [chartMetric, setChartMetric] = useState<ChartMetricKey>('posts')
 
@@ -36,35 +36,41 @@ export function StatsMonitoringPage() {
     viewMode === 'month' ? { month: selectedMonth } : { days }
   )
 
-  const dailyColumns: ColumnDef<DailyStatsItem>[] = [
-    {
-      accessorKey: 'date',
-      header: '일자',
-      cell: ({ row }) => format(new Date(row.original.date), 'yyyy-MM-dd'),
-    },
-    {
-      accessorKey: 'cumulative_members',
-      header: '일별 누적회원',
-    },
-    {
-      accessorKey: 'withdrawn_members',
-      header: '일별 탈퇴회원',
-    },
-    {
-      accessorKey: 'posts',
-      header: '일별 게시글',
-    },
-    {
-      accessorKey: 'comments',
-      header: '일별 댓글',
-    },
-  ]
+  const dailyColumns = useMemo<ColumnDef<DailyStatsItem>[]>(
+    () => [
+      {
+        accessorKey: 'date',
+        header: '일자',
+        cell: ({ row }) => formatApiDate(row.original.date, 'yyyy-MM-dd'),
+      },
+      {
+        accessorKey: 'cumulative_members',
+        header: '일별 누적회원',
+      },
+      {
+        accessorKey: 'withdrawn_members',
+        header: '일별 탈퇴회원',
+      },
+      {
+        accessorKey: 'posts',
+        header: '일별 게시글',
+      },
+      {
+        accessorKey: 'comments',
+        header: '일별 댓글',
+      },
+    ],
+    []
+  )
 
-  const boardColumns: ColumnDef<BoardPostCountItem>[] = [
-    { accessorKey: 'board_name', header: '게시판' },
-    { accessorKey: 'board_slug', header: '슬러그' },
-    { accessorKey: 'post_count', header: '게시글 수' },
-  ]
+  const boardColumns = useMemo<ColumnDef<BoardPostCountItem>[]>(
+    () => [
+      { accessorKey: 'board_name', header: '게시판' },
+      { accessorKey: 'board_slug', header: '슬러그' },
+      { accessorKey: 'post_count', header: '게시글 수' },
+    ],
+    []
+  )
 
   const maxBoardPostCount = useMemo(() => {
     const items = statsQuery.data?.board_post_counts ?? []
@@ -119,7 +125,7 @@ export function StatsMonitoringPage() {
               type="month"
               className="h-10 rounded-md border border-input bg-card px-3 text-sm"
               value={selectedMonth}
-              max={format(new Date(), 'yyyy-MM')}
+              max={formatNowKst('yyyy-MM')}
               onChange={(event) => setSelectedMonth(event.target.value)}
             />
           ) : (
@@ -226,7 +232,7 @@ export function StatsMonitoringPage() {
                     const value = Number(item[chartMetric])
                     const ratio = (value / chartStats.max) * 100
                     const heightPx = Math.max((ratio / 100) * 180, 2)
-                    const dayLabel = format(new Date(item.date), 'd')
+                    const dayLabel = formatApiDate(item.date, 'd')
                     const showDayLabel =
                       index === 0 ||
                       index === chartStats.items.length - 1 ||
@@ -235,7 +241,7 @@ export function StatsMonitoringPage() {
                     return (
                       <div key={item.date} className="group relative flex min-w-[16px] flex-1 flex-col">
                         <div className="pointer-events-none absolute left-1/2 top-1 z-10 -translate-x-1/2 rounded-md border border-border/80 bg-background/95 px-2 py-1 text-[11px] text-foreground opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
-                          <p className="whitespace-nowrap">{format(new Date(item.date), 'yyyy-MM-dd')}</p>
+                          <p className="whitespace-nowrap">{formatApiDate(item.date, 'yyyy-MM-dd')}</p>
                           <p className="whitespace-nowrap text-muted-foreground">
                             {selectedMetric.label}: {value.toLocaleString()}
                           </p>

@@ -3,10 +3,11 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { postsApi, type PostListParams } from '@/lib/api'
 import { queryClient } from '@/lib/queryClient'
 
-export function usePostsQuery(params: PostListParams) {
+export function usePostsQuery(params: PostListParams, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['posts', params],
     queryFn: () => postsApi.list(params),
+    enabled: options?.enabled ?? true,
   })
 }
 

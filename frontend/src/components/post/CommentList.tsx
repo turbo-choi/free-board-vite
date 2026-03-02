@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { format } from 'date-fns'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { formatApiDate } from '@/lib/datetime'
 import type { Comment, User } from '@/types/domain'
 
 interface CommentListProps {
@@ -51,7 +51,7 @@ export function CommentList({ comments, currentUser, canWrite, onCreate, onUpdat
             <li key={comment.id} className="rounded-xl border border-border/60 bg-card/70 p-4">
               <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
                 <span className="font-semibold text-foreground">{comment.author.name}</span>
-                <span>{format(new Date(comment.created_at), 'yyyy-MM-dd HH:mm')}</span>
+                <span>{formatApiDate(comment.created_at, 'yyyy-MM-dd HH:mm')}</span>
               </div>
 
               {editingId === comment.id ? (

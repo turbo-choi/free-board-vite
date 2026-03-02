@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
 import type { ColumnDef } from '@tanstack/react-table'
 import { RefreshCw } from 'lucide-react'
 
@@ -10,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAuditLogsQuery } from '@/features/audit-logs/queries'
+import { formatApiDate } from '@/lib/datetime'
 import type { AuditLogEntry } from '@/types/domain'
 
 const PAGE_SIZE = 20
@@ -65,7 +65,7 @@ export function AdminAuditLogsPage() {
       {
         accessorKey: 'created_at',
         header: '발생 시각',
-        cell: ({ row }) => format(new Date(row.original.created_at), 'yyyy-MM-dd HH:mm:ss'),
+        cell: ({ row }) => formatApiDate(row.original.created_at, 'yyyy-MM-dd HH:mm:ss'),
       },
       {
         id: 'actor',

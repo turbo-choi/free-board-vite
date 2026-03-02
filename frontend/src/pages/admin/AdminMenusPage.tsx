@@ -22,7 +22,7 @@ import {
   useReorderMenusMutation,
   useUpdateMenuMutation,
 } from '@/features/menus/queries'
-import { MENU_ICON_OPTIONS, getMenuIcon } from '@/features/menus/iconRegistry'
+import { MENU_ICON_OPTIONS, MenuIcon } from '@/features/menus/iconRegistry'
 import { getMenuAccess } from '@/features/menus/permissions'
 import { useAuth } from '@/hooks/useAuth'
 import { toApiError } from '@/lib/api'
@@ -105,10 +105,14 @@ export function AdminMenusPage() {
         header: '아이콘',
         cell: ({ row }) => {
           const iconKey = row.original.icon
-          const Icon = getMenuIcon(iconKey, row.original.target, row.original.type)
           return (
             <div className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-              <Icon className="h-4 w-4 text-foreground" />
+              <MenuIcon
+                iconKey={iconKey}
+                target={row.original.target}
+                type={row.original.type}
+                className="h-4 w-4 text-foreground"
+              />
               <span>{iconKey || '자동'}</span>
             </div>
           )

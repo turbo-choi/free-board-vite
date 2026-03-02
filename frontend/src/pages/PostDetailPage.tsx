@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
 import { ArrowLeft } from 'lucide-react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -20,6 +19,7 @@ import {
 } from '@/features/comments/queries'
 import { useAuth } from '@/hooks/useAuth'
 import { attachmentsApi, toApiError } from '@/lib/api'
+import { formatApiDate } from '@/lib/datetime'
 
 export function PostDetailPage() {
   const { id } = useParams()
@@ -67,10 +67,6 @@ export function PostDetailPage() {
   const fromPath = (location.state as { fromPath?: string } | null)?.fromPath
   const backPath = fromPath && !fromPath.startsWith('/posts/') ? fromPath : `/boards/${post.board_slug}`
   const handleBack = () => {
-    if (fromPath) {
-      navigate(-1)
-      return
-    }
     navigate(backPath)
   }
 
@@ -93,7 +89,7 @@ export function PostDetailPage() {
               </div>
               <CardTitle>{post.title}</CardTitle>
               <p className="mt-2 text-sm text-muted-foreground">
-                {post.author_name} · {format(new Date(post.created_at), 'yyyy-MM-dd HH:mm')} · 조회 {post.view_count}
+                {post.author_name} · {formatApiDate(post.created_at, 'yyyy-MM-dd HH:mm')} · 조회 {post.view_count}
               </p>
             </div>
             {canManagePost && canWriteBoard ? (

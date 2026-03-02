@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -21,7 +21,7 @@ from app.models.user_status_event import UserStatusEvent, UserStatusEventType
 
 DEFAULT_ADMIN_EMAIL = 'admin@corp.com'
 DEFAULT_ADMIN_NAME = 'Admin'
-DEFAULT_ADMIN_PASSWORD = 'admin1234'
+DEFAULT_ADMIN_PASSWORD = settings.default_admin_password
 
 TEST_DATA_MARKER = '[SEED-STATS]'
 TEST_USER_PASSWORD = 'test1234'
@@ -737,7 +737,7 @@ async def _seed_test_data(session: AsyncSession) -> None:
     if any(slug not in board_map for slug in required_slugs):
         return
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now().astimezone().replace(tzinfo=None)
     test_password_hash = hash_password(TEST_USER_PASSWORD)
 
     user_map: dict[str, User] = {}

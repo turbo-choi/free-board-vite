@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { format } from 'date-fns'
 import { Menu, Moon, PanelLeftClose, PanelLeftOpen, Search, Sun } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -15,6 +14,7 @@ import {
   useWithdrawMeMutation,
 } from '@/features/users/queries'
 import { toApiError } from '@/lib/api'
+import { formatApiDate } from '@/lib/datetime'
 
 interface TopHeaderProps {
   title: string
@@ -166,7 +166,7 @@ export function TopHeader({
             <p>
               <span className="text-muted-foreground">가입일:</span>{' '}
               {profileQuery.data?.user.created_at
-                ? format(new Date(profileQuery.data.user.created_at), 'yyyy-MM-dd HH:mm')
+                ? formatApiDate(profileQuery.data.user.created_at, 'yyyy-MM-dd HH:mm')
                 : '-'}
             </p>
           </div>

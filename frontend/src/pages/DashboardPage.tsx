@@ -1,5 +1,4 @@
 import { type ReactNode, useMemo } from 'react'
-import { format } from 'date-fns'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { MessageSquare, Pin, TrendingUp } from 'lucide-react'
@@ -10,6 +9,7 @@ import { LoadingBlock } from '@/components/common/LoadingBlock'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { usePostsQuery } from '@/features/posts/queries'
+import { formatApiDate, formatNowKst } from '@/lib/datetime'
 import type { PostListItem } from '@/types/domain'
 
 function StatCard({
@@ -43,11 +43,11 @@ export function DashboardPage() {
   const noticeQuery = usePostsQuery({ boardSlug: 'notice', page: 1, size: 5, sort: 'latest' })
   const allQuery = usePostsQuery({ page: 1, size: 100, sort: 'latest' })
 
-  const today = new Date().toDateString()
+  const today = formatNowKst('yyyy-MM-dd')
 
   const stats = useMemo(() => {
     const posts = allQuery.data?.items ?? []
-    const todaysPosts = posts.filter((post) => new Date(post.created_at).toDateString() === today)
+    const todaysPosts = posts.filter((post) => formatApiDate(post.created_at, 'yyyy-MM-dd') === today)
     const todaysComments = todaysPosts.reduce((sum, post) => sum + post.comment_count, 0)
     const unanswered = posts.filter((post) => post.board_slug === 'qa' && post.comment_count === 0).length
     const pinned = posts.filter((post) => post.is_pinned).length
@@ -60,32 +60,35 @@ export function DashboardPage() {
     }
   }, [allQuery.data?.items, today])
 
-  const columns: ColumnDef<PostListItem>[] = [
-    {
-      accessorKey: 'title',
-      header: '제목',
-      cell: ({ row }) => {
-        const post = row.original
-        return (
-          <div>
-            <p className="font-semibold">{post.title}</p>
-            <p className="text-xs text-muted-foreground">{post.author_name}</p>
-          </div>
-        )
+  const columns = useMemo<ColumnDef<PostListItem>[]>(
+    () => [
+      {
+        accessorKey: 'title',
+        header: '제목',
+        cell: ({ row }) => {
+          const post = row.original
+          return (
+            <div>
+              <p className="font-semibold">{post.title}</p>
+              <p className="text-xs text-muted-foreground">{post.author_name}</p>
+            </div>
+          )
+        },
       },
-    },
-    {
-      accessorKey: 'created_at',
-      header: '작성일',
-      cell: ({ row }) => format(new Date(row.original.created_at), 'yyyy-MM-dd'),
-    },
-    {
-      accessorKey: 'is_pinned',
-      header: '상태',
-      cell: ({ row }) =>
-        row.original.is_pinned ? <Badge variant="warning">Pinned</Badge> : <Badge variant="outline">Normal</Badge>,
-    },
-  ]
+      {
+        accessorKey: 'created_at',
+        header: '작성일',
+        cell: ({ row }) => formatApiDate(row.original.created_at, 'yyyy-MM-dd'),
+      },
+      {
+        accessorKey: 'is_pinned',
+        header: '상태',
+        cell: ({ row }) =>
+          row.original.is_pinned ? <Badge variant="warning">Pinned</Badge> : <Badge variant="outline">Normal</Badge>,
+      },
+    ],
+    []
+  )
 
   if (noticeQuery.isLoading || allQuery.isLoading) {
     return <LoadingBlock />

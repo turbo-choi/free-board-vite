@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
@@ -15,6 +14,7 @@ import { useNavigationMenusQuery } from '@/features/menus/queries'
 import { getMenuAccess } from '@/features/menus/permissions'
 import { usePostsQuery } from '@/features/posts/queries'
 import { useAuth } from '@/hooks/useAuth'
+import { formatApiDate } from '@/lib/datetime'
 import type { PostListItem } from '@/types/domain'
 
 export function BoardListPage() {
@@ -32,15 +32,6 @@ export function BoardListPage() {
 
   const boardsQuery = useBoardsQuery()
   const navigationMenusQuery = useNavigationMenusQuery()
-  const postsQuery = usePostsQuery({
-    boardSlug: slug,
-    q: q || undefined,
-    sort,
-    page,
-    size: 10,
-    from: from || undefined,
-    to: to || undefined,
-  })
 
   const board = useMemo(
     () => boardsQuery.data?.find((item) => item.slug === slug),
@@ -53,6 +44,20 @@ export function BoardListPage() {
   )
   const canReadBoard = boardAccess.canRead || user?.role === 'ADMIN'
   const canWriteBoard = boardAccess.canWrite || (user?.role === 'ADMIN' && !boardAccess.canRead)
+  const postsQuery = usePostsQuery(
+    {
+      boardSlug: slug,
+      q: q || undefined,
+      sort,
+      page,
+      size: 10,
+      from: from || undefined,
+      to: to || undefined,
+    },
+    {
+      enabled: Boolean(slug) && !navigationMenusQuery.isLoading && canReadBoard,
+    }
+  )
 
   const handleResetFilters = () => {
     setQInput('')
@@ -69,41 +74,44 @@ export function BoardListPage() {
     setQ(qInput)
   }
 
-  const columns: ColumnDef<PostListItem>[] = [
-    {
-      accessorKey: 'title',
-      header: '제목',
-      cell: ({ row }) => (
-        <div>
-          <p className="font-semibold">{row.original.title}</p>
-          <p className="text-xs text-muted-foreground">{row.original.content_preview}</p>
-        </div>
-      ),
-    },
-    {
-      accessorKey: 'author_name',
-      header: '작성자',
-    },
-    {
-      accessorKey: 'view_count',
-      header: '조회',
-    },
-    {
-      accessorKey: 'comment_count',
-      header: '댓글',
-    },
-    {
-      accessorKey: 'created_at',
-      header: '작성일',
-      cell: ({ row }) => format(new Date(row.original.created_at), 'yyyy-MM-dd'),
-    },
-    {
-      id: 'status',
-      header: '상태',
-      cell: ({ row }) =>
-        row.original.is_pinned ? <Badge variant="warning">Pinned</Badge> : <Badge variant="outline">Normal</Badge>,
-    },
-  ]
+  const columns = useMemo<ColumnDef<PostListItem>[]>(
+    () => [
+      {
+        accessorKey: 'title',
+        header: '제목',
+        cell: ({ row }) => (
+          <div>
+            <p className="font-semibold">{row.original.title}</p>
+            <p className="text-xs text-muted-foreground">{row.original.content_preview}</p>
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'author_name',
+        header: '작성자',
+      },
+      {
+        accessorKey: 'view_count',
+        header: '조회',
+      },
+      {
+        accessorKey: 'comment_count',
+        header: '댓글',
+      },
+      {
+        accessorKey: 'created_at',
+        header: '작성일',
+        cell: ({ row }) => formatApiDate(row.original.created_at, 'yyyy-MM-dd'),
+      },
+      {
+        id: 'status',
+        header: '상태',
+        cell: ({ row }) =>
+          row.original.is_pinned ? <Badge variant="warning">Pinned</Badge> : <Badge variant="outline">Normal</Badge>,
+      },
+    ],
+    []
+  )
 
   if (boardsQuery.isLoading || postsQuery.isLoading || navigationMenusQuery.isLoading) {
     return <LoadingBlock />
