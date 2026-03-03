@@ -226,12 +226,12 @@ export function StatsMonitoringPage() {
                 <span>일자</span>
               </div>
 
-              <div className="overflow-x-auto overflow-y-visible">
-                <div className="flex min-w-[680px] gap-1">
+              <div className="overflow-hidden overflow-y-visible">
+                <div className="flex w-full gap-px">
                   {chartStats.items.map((item, index) => {
                     const value = Number(item[chartMetric])
                     const ratio = (value / chartStats.max) * 100
-                    const heightPx = Math.max((ratio / 100) * 180, 2)
+                    const heightPx = value > 0 ? Math.max((ratio / 100) * 180, 2) : 0
                     const dayLabel = formatApiDate(item.date, 'd')
                     const showDayLabel =
                       index === 0 ||
@@ -239,7 +239,7 @@ export function StatsMonitoringPage() {
                       Number(dayLabel) % 5 === 0
 
                     return (
-                      <div key={item.date} className="group relative flex min-w-[16px] flex-1 flex-col">
+                      <div key={item.date} className="group relative flex min-w-0 flex-1 flex-col">
                         <div className="pointer-events-none absolute left-1/2 top-1 z-10 -translate-x-1/2 rounded-md border border-border/80 bg-background/95 px-2 py-1 text-[11px] text-foreground opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
                           <p className="whitespace-nowrap">{formatApiDate(item.date, 'yyyy-MM-dd')}</p>
                           <p className="whitespace-nowrap text-muted-foreground">
