@@ -39,8 +39,8 @@ function SidebarBrand({ collapsed }: { collapsed: boolean }) {
   return (
     <div
       className={cn(
-        'inline-flex items-center rounded-xl border border-sidebar-brand-border/35 bg-sidebar-brand/80',
-        collapsed ? 'p-2' : 'gap-3 px-3 py-2'
+        'items-center rounded-xl border border-sidebar-brand-border/35 bg-sidebar-brand/80',
+        collapsed ? 'inline-flex p-2' : 'flex w-full gap-3 px-3 py-2'
       )}
       title={collapsed ? 'CorpBoard' : undefined}
     >
@@ -48,7 +48,7 @@ function SidebarBrand({ collapsed }: { collapsed: boolean }) {
         <Building2 className="h-5 w-5" />
       </div>
       {collapsed ? null : (
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <p className="truncate text-base font-extrabold leading-tight text-sidebar-foreground">CorpBoard</p>
           <p className="truncate text-[11px] text-sidebar-muted-foreground">Internal Bulletin</p>
         </div>
@@ -208,7 +208,7 @@ export function SidebarNav({
 
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 w-[280px] border-r border-sidebar-border bg-sidebar/95 text-sidebar-foreground shadow-2xl transition-transform duration-200 lg:hidden',
+          'fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col border-r border-sidebar-border bg-sidebar/95 text-sidebar-foreground shadow-2xl transition-transform duration-200 lg:hidden',
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
