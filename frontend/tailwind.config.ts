@@ -27,6 +27,12 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        sidebar: 'hsl(var(--sidebar))',
+        'sidebar-foreground': 'hsl(var(--sidebar-foreground))',
+        'sidebar-muted-foreground': 'hsl(var(--sidebar-muted-foreground))',
+        'sidebar-border': 'hsl(var(--sidebar-border))',
+        'sidebar-brand': 'hsl(var(--sidebar-brand))',
+        'sidebar-brand-border': 'hsl(var(--sidebar-brand-border))',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',

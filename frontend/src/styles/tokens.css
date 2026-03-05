@@ -16,6 +16,12 @@
   --border: 215 27% 26%;
   --input: 215 27% 26%;
   --ring: 198 92% 56%;
+  --sidebar: 218 41% 16%;
+  --sidebar-foreground: 213 31% 94%;
+  --sidebar-muted-foreground: 215 18% 72%;
+  --sidebar-border: 216 26% 27%;
+  --sidebar-brand: 219 35% 22%;
+  --sidebar-brand-border: 198 78% 50%;
   --radius: 0.9rem;
 }
 
@@ -30,4 +36,10 @@
   --muted-foreground: 215 16% 40%;
   --border: 214 32% 88%;
   --input: 214 32% 88%;
+  --sidebar: 210 44% 98%;
+  --sidebar-foreground: 222 47% 14%;
+  --sidebar-muted-foreground: 215 16% 42%;
+  --sidebar-border: 214 32% 88%;
+  --sidebar-brand: 210 45% 96%;
+  --sidebar-brand-border: 198 90% 56%;
 }

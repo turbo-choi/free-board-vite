@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown } from 'lucide-react'
+import { Building2, ChevronDown } from 'lucide-react'
 
 import { EmptyState } from '@/components/common/EmptyState'
 import { MenuIcon } from '@/features/menus/iconRegistry'
@@ -33,6 +33,28 @@ function readCollapsedGroups(): Record<string, boolean> {
 
 function persistCollapsedGroups(value: Record<string, boolean>) {
   localStorage.setItem(CATEGORY_COLLAPSE_KEY, JSON.stringify(value))
+}
+
+function SidebarBrand({ collapsed }: { collapsed: boolean }) {
+  return (
+    <div
+      className={cn(
+        'inline-flex items-center rounded-xl border border-sidebar-brand-border/35 bg-sidebar-brand/80',
+        collapsed ? 'p-2' : 'gap-3 px-3 py-2'
+      )}
+      title={collapsed ? 'CorpBoard' : undefined}
+    >
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+        <Building2 className="h-5 w-5" />
+      </div>
+      {collapsed ? null : (
+        <div className="min-w-0">
+          <p className="truncate text-base font-extrabold leading-tight text-sidebar-foreground">CorpBoard</p>
+          <p className="truncate text-[11px] text-sidebar-muted-foreground">Internal Bulletin</p>
+        </div>
+      )}
+    </div>
+  )
 }
 
 function SidebarSection({
@@ -75,7 +97,7 @@ function SidebarSection({
       collapsed ? 'justify-center' : 'gap-3',
       active
         ? 'bg-primary/15 text-primary'
-        : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground'
+        : 'text-sidebar-muted-foreground hover:bg-sidebar-brand/60 hover:text-sidebar-foreground'
     )
 
     if (isExternal) {
@@ -122,7 +144,7 @@ function SidebarSection({
             {!collapsed ? (
               <button
                 type="button"
-                className="mb-1 flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground hover:bg-secondary/60"
+                className="mb-1 flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left text-[11px] font-semibold uppercase tracking-wider text-sidebar-muted-foreground hover:bg-sidebar-brand/55 hover:text-sidebar-foreground"
                 onClick={() => onToggleGroup(groupKey)}
               >
                 <span>{group.category_label}</span>
@@ -162,21 +184,13 @@ export function SidebarNav({
     <>
       <aside
         className={cn(
-          'hidden h-full flex-col border-r border-border bg-[#172338]/95 lg:flex',
+          'hidden h-full flex-col border-r border-sidebar-border bg-sidebar/95 text-sidebar-foreground lg:flex',
           collapsed ? 'w-20' : 'w-[280px]'
         )}
       >
-        <div className="flex h-16 items-center border-b border-border px-3">
+        <div className="flex h-16 items-center border-b border-sidebar-border px-3">
           <div className={cn('flex w-full items-center', collapsed ? 'justify-center' : 'justify-start')}>
-            <div className={cn('inline-flex items-center rounded-xl border border-primary/20 bg-primary/10', collapsed ? 'p-2' : 'gap-3 px-3 py-2')}>
-              <div className="h-8 w-8 rounded-lg bg-primary/90" />
-              {collapsed ? null : (
-                <div>
-                  <p className="text-base font-extrabold">CorpBoard</p>
-                  <p className="text-[11px] text-muted-foreground">Internal Bulletin</p>
-                </div>
-              )}
-            </div>
+            <SidebarBrand collapsed={collapsed} />
           </div>
         </div>
         <SidebarSection
@@ -194,18 +208,12 @@ export function SidebarNav({
 
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 w-[280px] border-r border-border bg-[#172338]/95 shadow-2xl transition-transform duration-200 lg:hidden',
+          'fixed inset-y-0 left-0 z-50 w-[280px] border-r border-sidebar-border bg-sidebar/95 text-sidebar-foreground shadow-2xl transition-transform duration-200 lg:hidden',
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <div className="flex h-16 items-center border-b border-border px-4">
-          <div className="inline-flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/10 px-3 py-2">
-            <div className="h-8 w-8 rounded-lg bg-primary/90" />
-            <div>
-              <p className="text-base font-extrabold">CorpBoard</p>
-              <p className="text-[11px] text-muted-foreground">Internal Bulletin</p>
-            </div>
-          </div>
+        <div className="flex h-16 items-center border-b border-sidebar-border px-4">
+          <SidebarBrand collapsed={false} />
         </div>
         <SidebarSection
           groups={groups}
