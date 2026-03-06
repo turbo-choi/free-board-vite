@@ -1,7 +1,7 @@
 import { type ReactNode, useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import { MessageSquare, Pin, TrendingUp } from 'lucide-react'
+import { ArrowUpRight, MessageSquare, Pin, TrendingUp } from 'lucide-react'
 
 import { DataTable } from '@/components/common/DataTable'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -11,6 +11,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { usePostsQuery } from '@/features/posts/queries'
 import { formatApiDate, formatNowKst } from '@/lib/datetime'
 import type { PostListItem } from '@/types/domain'
+
+const QUICK_LINK_SAMPLES = [
+  { label: 'Employee Handbook', href: 'https://www.google.com' },
+  { label: 'IT Help Desk', href: 'https://www.google.com' },
+  { label: 'Meeting Rooms', href: 'https://www.google.com' },
+  { label: '의사소통-MatterMost', href: 'https://mattermost.technet.com/' },
+  { label: '프로젝트 관리-DAPLINK', href: 'http://localhost:3001' },
+] as const
 
 function StatCard({
   title,
@@ -123,17 +131,28 @@ export function DashboardPage() {
           )}
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Quick Links</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>• Employee Handbook</p>
-            <p>• IT Help Desk</p>
-            <p>• Meeting Rooms</p>
-            <p>• Learning Portal</p>
-          </CardContent>
-        </Card>
+        <div className="space-y-3">
+          <h2 className="text-lg font-bold">Quick Links</h2>
+          <Card className="overflow-hidden">
+            <CardContent className="p-0">
+              <ul className="divide-y divide-border/70">
+                {QUICK_LINK_SAMPLES.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-between px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-secondary/45 hover:text-foreground"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )
