@@ -4,9 +4,10 @@ from fastapi import APIRouter, Query
 from app.core.deps import CurrentUserDep, SessionDep
 from app.core.exceptions import AppException
 from app.core.security import hash_password, verify_password
-from app.crud.user import get_user_by_id, list_users
+from app.crud.user import count_active_admins, get_user_by_id, list_users
 from app.models.comment import Comment
 from app.models.post import Post
+from app.models.user import UserRole
 from app.models.user_status_event import UserStatusEvent, UserStatusEventType
 from app.schemas.user import (
     ChangePasswordRequest,
@@ -53,6 +54,12 @@ async def change_my_password(
 @router.delete('/me/withdraw', status_code=204)
 async def withdraw_my_account(user: CurrentUserDep, session: SessionDep) -> None:
     was_active = user.is_active
+    if user.role == UserRole.ADMIN and was_active and await count_active_admins(session) <= 1:
+        raise AppException(
+            'At least one active admin must remain',
+            'LAST_ACTIVE_ADMIN_REQUIRED',
+            400,
+        )
     user.is_active = False
     if was_active:
         session.add(UserStatusEvent(user_id=user.id, event_type=UserStatusEventType.DEACTIVATED))
@@ -89,6 +96,18 @@ async def update_user_role(
     if target_user is None:
         raise AppException('User not found', 'USER_NOT_FOUND', 404)
 
+    if (
+        target_user.role == UserRole.ADMIN
+        and payload.role != UserRole.ADMIN
+        and target_user.is_active
+        and await count_active_admins(session) <= 1
+    ):
+        raise AppException(
+            'At least one active admin must remain',
+            'LAST_ACTIVE_ADMIN_REQUIRED',
+            400,
+        )
+
     target_user.role = payload.role
     await session.commit()
     await session.refresh(target_user)
@@ -109,6 +128,18 @@ async def update_user_active(
 
     if user.id == current_user.id and not payload.is_active:
         raise AppException('You cannot deactivate yourself', 'CANNOT_DEACTIVATE_SELF', 400)
+
+    if (
+        user.role == UserRole.ADMIN
+        and user.is_active
+        and not payload.is_active
+        and await count_active_admins(session) <= 1
+    ):
+        raise AppException(
+            'At least one active admin must remain',
+            'LAST_ACTIVE_ADMIN_REQUIRED',
+            400,
+        )
 
     if user.is_active != payload.is_active:
         event_type = (

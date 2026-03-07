@@ -13,7 +13,7 @@ class Menu(Base):
     label: Mapped[str] = mapped_column(String(100), nullable=False)
     icon: Mapped[str | None] = mapped_column(String(100), nullable=True)
     type: Mapped[str] = mapped_column(String(50), nullable=False)
-    target: Mapped[str] = mapped_column(String(255), nullable=False)
+    target: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     order: Mapped[int] = mapped_column(Integer, default=0, nullable=False, index=True)
     is_visible: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     category_id: Mapped[int | None] = mapped_column(

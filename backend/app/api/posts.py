@@ -9,7 +9,7 @@ from app.crud.post import get_post_by_id, get_post_detail, list_posts
 from app.models.post import Post
 from app.models.user import UserRole
 from app.schemas.post import PostCreateRequest, PostDetail, PostListQuery, PostListResponse, PostSort, PostUpdateRequest
-from app.services.access_control import ensure_read_permission, ensure_write_permission
+from app.services.access_control import ensure_read_permission, ensure_write_permission, list_readable_boards
 
 router = APIRouter(prefix='/posts', tags=['posts'])
 
@@ -31,9 +31,6 @@ async def get_posts(
     from_date: date | None = Query(default=None, alias='from'),
     to_date: date | None = Query(default=None, alias='to'),
 ) -> PostListResponse:
-    if boardSlug:
-        await ensure_read_permission(session, target=f'/boards/{boardSlug}', role=user.role)
-
     query = PostListQuery.model_validate(
         {
             'boardSlug': boardSlug,
@@ -45,7 +42,18 @@ async def get_posts(
             'to': to_date,
         }
     )
-    items, total = await list_posts(session, query)
+
+    if boardSlug:
+        await ensure_read_permission(session, target=f'/boards/{boardSlug}', role=user.role)
+        items, total = await list_posts(session, query)
+        return PostListResponse(items=items, total=total, page=query.page, size=query.size)
+
+    readable_boards = await list_readable_boards(session, role=user.role)
+    allowed_board_slugs = [board.slug for board in readable_boards]
+    if not allowed_board_slugs:
+        return PostListResponse(items=[], total=0, page=query.page, size=query.size)
+
+    items, total = await list_posts(session, query, allowed_board_slugs=allowed_board_slugs)
     return PostListResponse(items=items, total=total, page=query.page, size=query.size)
 
 

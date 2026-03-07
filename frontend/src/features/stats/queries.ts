@@ -7,6 +7,13 @@ interface StatsMonitoringParams {
   month?: string
 }
 
+export function useDashboardStatsQuery() {
+  return useQuery({
+    queryKey: ['stats', 'dashboard'],
+    queryFn: statsApi.dashboard,
+  })
+}
+
 export function useStatsMonitoringQuery(params: StatsMonitoringParams) {
   return useQuery({
     queryKey: ['stats', 'monitoring', params],

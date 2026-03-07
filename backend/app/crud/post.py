@@ -12,7 +12,13 @@ from app.schemas.post import PostDetail, PostListItem, PostListQuery, PostSort
 
 
 
-def _apply_post_filters(stmt, query: PostListQuery):
+def _apply_post_filters(stmt, query: PostListQuery, *, allowed_board_slugs: list[str] | None = None):
+    if allowed_board_slugs is not None:
+        if not allowed_board_slugs:
+            stmt = stmt.where(False)
+        else:
+            stmt = stmt.where(Board.slug.in_(allowed_board_slugs))
+
     if query.boardSlug:
         stmt = stmt.where(Board.slug == query.boardSlug)
 
@@ -35,7 +41,12 @@ def _apply_post_filters(stmt, query: PostListQuery):
     return stmt
 
 
-async def list_posts(session: AsyncSession, query: PostListQuery) -> tuple[list[PostListItem], int]:
+async def list_posts(
+    session: AsyncSession,
+    query: PostListQuery,
+    *,
+    allowed_board_slugs: list[str] | None = None,
+) -> tuple[list[PostListItem], int]:
     comment_count_sq = (
         select(Comment.post_id, func.count(Comment.id).label('comment_count'))
         .group_by(Comment.post_id)
@@ -43,7 +54,7 @@ async def list_posts(session: AsyncSession, query: PostListQuery) -> tuple[list[
     )
 
     total_stmt = select(func.count(Post.id)).join(Board, Post.board_id == Board.id).join(User, Post.author_id == User.id)
-    total_stmt = _apply_post_filters(total_stmt, query)
+    total_stmt = _apply_post_filters(total_stmt, query, allowed_board_slugs=allowed_board_slugs)
     total = await session.scalar(total_stmt) or 0
 
     stmt = (
@@ -58,7 +69,7 @@ async def list_posts(session: AsyncSession, query: PostListQuery) -> tuple[list[
         .join(User, Post.author_id == User.id)
         .outerjoin(comment_count_sq, comment_count_sq.c.post_id == Post.id)
     )
-    stmt = _apply_post_filters(stmt, query)
+    stmt = _apply_post_filters(stmt, query, allowed_board_slugs=allowed_board_slugs)
 
     order_clauses = [Post.is_pinned.desc()]
     if query.sort == PostSort.view:

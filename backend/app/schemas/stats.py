@@ -11,6 +11,13 @@ class StatsSummary(BaseModel):
     total_comments: int
 
 
+class DashboardStatsOut(BaseModel):
+    today_posts: int
+    today_comments: int
+    unanswered_qa_count: int
+    pinned_notice_count: int
+
+
 class DailyStatsOut(BaseModel):
     date: date
     cumulative_members: int

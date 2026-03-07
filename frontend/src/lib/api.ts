@@ -6,6 +6,7 @@ import type {
   Attachment,
   Board,
   Comment,
+  DashboardStats,
   Menu,
   MenuCategory,
   MyProfileResponse,
@@ -266,6 +267,10 @@ export const usersApi = {
 }
 
 export const statsApi = {
+  async dashboard() {
+    const { data } = await api.get<DashboardStats>('/stats/dashboard')
+    return data
+  },
   async monitoring(params?: { days?: number; month?: string }) {
     const { data } = await api.get<StatsMonitoring>('/stats/monitoring', { params })
     return data

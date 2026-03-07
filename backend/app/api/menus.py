@@ -6,6 +6,7 @@ from app.core.deps import CurrentUserDep, SessionDep
 from app.core.exceptions import AppException
 from app.crud.menu import (
     get_menu_by_id,
+    get_menu_by_target,
     get_menu_category_by_id,
     list_menus,
     list_visible_menus,
@@ -111,6 +112,9 @@ async def create_menu(payload: MenuCreateRequest, user: CurrentUserDep, session:
         category = await get_menu_category_by_id(session, payload.category_id)
         if category is None:
             raise AppException('Menu category not found', 'MENU_CATEGORY_NOT_FOUND', 404)
+    existing_target = await get_menu_by_target(session, payload.target)
+    if existing_target is not None:
+        raise AppException('Menu target already exists', 'MENU_TARGET_EXISTS', 409)
 
     read_roles, write_roles, is_admin_only = serialize_role_permissions(
         payload.read_roles,
@@ -171,6 +175,12 @@ async def update_menu(
         category = await get_menu_category_by_id(session, updates['category_id'])
         if category is None:
             raise AppException('Menu category not found', 'MENU_CATEGORY_NOT_FOUND', 404)
+
+    next_target = updates.get('target')
+    if isinstance(next_target, str):
+        existing_target = await get_menu_by_target(session, next_target)
+        if existing_target is not None and existing_target.id != menu.id:
+            raise AppException('Menu target already exists', 'MENU_TARGET_EXISTS', 409)
 
     read_roles = updates.pop('read_roles', None)
     write_roles = updates.pop('write_roles', None)

@@ -1,7 +1,7 @@
 from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.user import User
+from app.models.user import User, UserRole
 
 
 async def list_users(
@@ -31,3 +31,15 @@ async def get_user_by_email(session: AsyncSession, email: str) -> User | None:
 
 async def get_user_by_id(session: AsyncSession, user_id: int) -> User | None:
     return await session.scalar(select(User).where(User.id == user_id))
+
+
+async def count_active_admins(session: AsyncSession) -> int:
+    return int(
+        await session.scalar(
+            select(func.count(User.id)).where(
+                User.role == UserRole.ADMIN,
+                User.is_active.is_(True),
+            )
+        )
+        or 0
+    )

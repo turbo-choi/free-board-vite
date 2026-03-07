@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Query
@@ -13,11 +13,12 @@ from app.models.user import User
 from app.models.user_status_event import UserStatusEvent, UserStatusEventType
 from app.schemas.stats import (
     BoardPostCountOut,
+    DashboardStatsOut,
     DailyStatsOut,
     StatsMonitoringResponse,
     StatsSummary,
 )
-from app.services.access_control import ensure_read_permission
+from app.services.access_control import ensure_read_permission, list_readable_boards
 
 router = APIRouter(prefix='/stats', tags=['stats'])
 
@@ -28,6 +29,91 @@ def _to_day_counts(rows: list[tuple[date | str, int]]) -> dict[date, int]:
         day = raw_day if isinstance(raw_day, date) else date.fromisoformat(str(raw_day))
         counts[day] = int(raw_count)
     return counts
+
+
+@router.get('/dashboard', response_model=DashboardStatsOut)
+async def get_dashboard_stats(user: CurrentUserDep, session: SessionDep) -> DashboardStatsOut:
+    readable_boards = await list_readable_boards(session, role=user.role)
+    if not readable_boards:
+        return DashboardStatsOut(
+            today_posts=0,
+            today_comments=0,
+            unanswered_qa_count=0,
+            pinned_notice_count=0,
+        )
+
+    readable_board_ids = [board.id for board in readable_boards]
+    board_slug_to_id = {board.slug: board.id for board in readable_boards}
+
+    today = date.today()
+    today_start = datetime.combine(today, time.min)
+    today_end = datetime.combine(today, time.max)
+
+    comment_count_sq = (
+        select(Comment.post_id, func.count(Comment.id).label('comment_count'))
+        .group_by(Comment.post_id)
+        .subquery()
+    )
+
+    today_posts = int(
+        await session.scalar(
+            select(func.count(Post.id)).where(
+                Post.board_id.in_(readable_board_ids),
+                Post.created_at >= today_start,
+                Post.created_at <= today_end,
+            )
+        )
+        or 0
+    )
+    today_comments = int(
+        await session.scalar(
+            select(func.coalesce(func.sum(func.coalesce(comment_count_sq.c.comment_count, 0)), 0))
+            .select_from(Post)
+            .outerjoin(comment_count_sq, comment_count_sq.c.post_id == Post.id)
+            .where(
+                Post.board_id.in_(readable_board_ids),
+                Post.created_at >= today_start,
+                Post.created_at <= today_end,
+            )
+        )
+        or 0
+    )
+
+    qa_board_id = board_slug_to_id.get('qa')
+    unanswered_qa_count = 0
+    if qa_board_id is not None:
+        unanswered_qa_count = int(
+            await session.scalar(
+                select(func.count(Post.id))
+                .select_from(Post)
+                .outerjoin(comment_count_sq, comment_count_sq.c.post_id == Post.id)
+                .where(
+                    Post.board_id == qa_board_id,
+                    func.coalesce(comment_count_sq.c.comment_count, 0) == 0,
+                )
+            )
+            or 0
+        )
+
+    notice_board_id = board_slug_to_id.get('notice')
+    pinned_notice_count = 0
+    if notice_board_id is not None:
+        pinned_notice_count = int(
+            await session.scalar(
+                select(func.count(Post.id)).where(
+                    Post.board_id == notice_board_id,
+                    Post.is_pinned.is_(True),
+                )
+            )
+            or 0
+        )
+
+    return DashboardStatsOut(
+        today_posts=today_posts,
+        today_comments=today_comments,
+        unanswered_qa_count=unanswered_qa_count,
+        pinned_notice_count=pinned_notice_count,
+    )
 
 
 @router.get('/monitoring', response_model=StatsMonitoringResponse)

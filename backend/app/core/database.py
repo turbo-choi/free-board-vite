@@ -82,6 +82,19 @@ def _sync_patch_menu_schema(connection) -> None:
         )
     )
 
+    duplicate_targets = connection.execute(
+        text(
+            "SELECT target FROM menus "
+            "GROUP BY target "
+            "HAVING COUNT(*) > 1"
+        )
+    ).fetchall()
+    if duplicate_targets:
+        duplicates = ', '.join(str(row[0]) for row in duplicate_targets)
+        raise RuntimeError(f'Duplicate menu targets found. Resolve before startup: {duplicates}')
+
+    connection.execute(text('CREATE UNIQUE INDEX IF NOT EXISTS ux_menus_target ON menus (target)'))
+
 
 def _sync_patch_user_schema(connection) -> None:
     inspector = inspect(connection)

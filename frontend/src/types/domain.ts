@@ -165,6 +165,13 @@ export interface StatsMonitoring {
   board_post_counts: BoardPostCountItem[]
 }
 
+export interface DashboardStats {
+  today_posts: number
+  today_comments: number
+  unanswered_qa_count: number
+  pinned_notice_count: number
+}
+
 export interface AuditLogEntry {
   id: number
   user_id: number | null

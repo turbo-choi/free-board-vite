@@ -1,23 +1,26 @@
 import { type ReactNode, useMemo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpRight, MessageSquare, Pin, TrendingUp } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { DataTable } from '@/components/common/DataTable'
 import { EmptyState } from '@/components/common/EmptyState'
 import { LoadingBlock } from '@/components/common/LoadingBlock'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { getMenuAccess } from '@/features/menus/permissions'
+import { useNavigationMenusQuery } from '@/features/menus/queries'
 import { usePostsQuery } from '@/features/posts/queries'
-import { formatApiDate, formatNowKst } from '@/lib/datetime'
-import type { PostListItem } from '@/types/domain'
+import { useDashboardStatsQuery } from '@/features/stats/queries'
+import { formatApiDate } from '@/lib/datetime'
+import type { DashboardStats, PostListItem } from '@/types/domain'
 
 const QUICK_LINK_SAMPLES = [
   { label: 'Employee Handbook', href: 'https://www.google.com' },
   { label: 'IT Help Desk', href: 'https://www.google.com' },
   { label: 'Meeting Rooms', href: 'https://www.google.com' },
-  { label: '의사소통-MatterMost', href: 'https://mattermost.technet.com/' },
-  { label: '프로젝트 관리-DAPLINK', href: 'http://localhost:3001' },
+  { label: 'Mattermost', href: 'https://mattermost.technet.com/' },
+  { label: 'DAPLINK', href: 'http://localhost:3001' },
 ] as const
 
 function StatCard({
@@ -48,31 +51,29 @@ function StatCard({
 export function DashboardPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const noticeQuery = usePostsQuery({ boardSlug: 'notice', page: 1, size: 5, sort: 'latest' })
-  const allQuery = usePostsQuery({ page: 1, size: 100, sort: 'latest' })
-
-  const today = formatNowKst('yyyy-MM-dd')
-
-  const stats = useMemo(() => {
-    const posts = allQuery.data?.items ?? []
-    const todaysPosts = posts.filter((post) => formatApiDate(post.created_at, 'yyyy-MM-dd') === today)
-    const todaysComments = todaysPosts.reduce((sum, post) => sum + post.comment_count, 0)
-    const unanswered = posts.filter((post) => post.board_slug === 'qa' && post.comment_count === 0).length
-    const pinned = posts.filter((post) => post.is_pinned).length
-
-    return {
-      todaysPosts: todaysPosts.length,
-      todaysComments,
-      unanswered,
-      pinned,
-    }
-  }, [allQuery.data?.items, today])
+  const navigationMenusQuery = useNavigationMenusQuery()
+  const dashboardStatsQuery = useDashboardStatsQuery()
+  const noticeAccess = useMemo(
+    () => getMenuAccess(navigationMenusQuery.data?.groups, '/boards/notice'),
+    [navigationMenusQuery.data?.groups]
+  )
+  const canReadNotice = noticeAccess.canRead
+  const noticeQuery = usePostsQuery(
+    { boardSlug: 'notice', page: 1, size: 5, sort: 'latest' },
+    { enabled: !navigationMenusQuery.isLoading && canReadNotice }
+  )
+  const stats: DashboardStats = dashboardStatsQuery.data ?? {
+    today_posts: 0,
+    today_comments: 0,
+    unanswered_qa_count: 0,
+    pinned_notice_count: 0,
+  }
 
   const columns = useMemo<ColumnDef<PostListItem>[]>(
     () => [
       {
         accessorKey: 'title',
-        header: '제목',
+        header: 'Title',
         cell: ({ row }) => {
           const post = row.original
           return (
@@ -85,12 +86,12 @@ export function DashboardPage() {
       },
       {
         accessorKey: 'created_at',
-        header: '작성일',
+        header: 'Created',
         cell: ({ row }) => formatApiDate(row.original.created_at, 'yyyy-MM-dd'),
       },
       {
         accessorKey: 'is_pinned',
-        header: '상태',
+        header: 'Status',
         cell: ({ row }) =>
           row.original.is_pinned ? <Badge variant="warning">Pinned</Badge> : <Badge variant="outline">Normal</Badge>,
       },
@@ -98,23 +99,43 @@ export function DashboardPage() {
     []
   )
 
-  if (noticeQuery.isLoading || allQuery.isLoading) {
+  if (navigationMenusQuery.isLoading || dashboardStatsQuery.isLoading || noticeQuery.isLoading) {
     return <LoadingBlock />
   }
 
   return (
     <div className="space-y-6 animate-fadeIn">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard title="Today's Posts" value={stats.todaysPosts} note="오늘 작성된 게시글" icon={<TrendingUp />} />
-        <StatCard title="Today's Comments" value={stats.todaysComments} note="오늘 게시글 기준 댓글 수" icon={<MessageSquare />} />
-        <StatCard title="Unanswered Q&A" value={stats.unanswered} note="댓글 없는 QA" icon={<MessageSquare />} />
-        <StatCard title="Pinned Notices" value={stats.pinned} note="고정된 게시글" icon={<Pin />} />
+        <StatCard
+          title="Today's Posts"
+          value={stats.today_posts}
+          note="Posts created today in readable boards"
+          icon={<TrendingUp />}
+        />
+        <StatCard
+          title="Today's Comments"
+          value={stats.today_comments}
+          note="Comments attached to today's readable posts"
+          icon={<MessageSquare />}
+        />
+        <StatCard
+          title="Unanswered Q&A"
+          value={stats.unanswered_qa_count}
+          note="Readable Q&A posts without comments"
+          icon={<MessageSquare />}
+        />
+        <StatCard
+          title="Pinned Notices"
+          value={stats.pinned_notice_count}
+          note="Pinned posts in the readable notice board"
+          icon={<Pin />}
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         <div className="space-y-3 xl:col-span-2">
           <h2 className="text-lg font-bold">Recent Notices</h2>
-          {(noticeQuery.data?.items.length ?? 0) > 0 ? (
+          {canReadNotice && (noticeQuery.data?.items.length ?? 0) > 0 ? (
             <DataTable
               data={noticeQuery.data?.items ?? []}
               columns={columns}
@@ -126,8 +147,12 @@ export function DashboardPage() {
                 })
               }
             />
+          ) : canReadNotice && noticeQuery.isError ? (
+            <EmptyState title="Unable to load recent notices." />
+          ) : canReadNotice ? (
+            <EmptyState title="No notices available." />
           ) : (
-            <EmptyState title="공지 게시글이 없습니다." />
+            <EmptyState title="Notice board is unavailable." />
           )}
         </div>
 
