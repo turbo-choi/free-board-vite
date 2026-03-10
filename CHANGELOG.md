@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented in this file.
 
+## [2026-03-10]
+
+### Changed
+- 보안 강화:
+  - `POST /api/auth/signup`에서 기존 이메일 계정 재사용(비밀번호 미설정 계정 포함) 경로 제거
+  - 로그인 시도 제한 키 생성 시 기본 IP 기준을 `request.client.host`로 통일
+  - 감사 로그 IP 기록도 기본적으로 `request.client.host` 기반으로 통일
+  - 프록시 헤더 신뢰는 `TRUST_PROXY_HEADERS=true` 설정 시에만 허용
+- 설정/문서 업데이트:
+  - `backend/.env.example`, `README.md`, `docs/project_documentation.md`에 `TRUST_PROXY_HEADERS` 추가
+
 ## [2026-03-02]
 
 ### Added

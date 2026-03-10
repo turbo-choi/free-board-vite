@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     login_attempt_window_seconds: int = Field(default=300, alias='LOGIN_ATTEMPT_WINDOW_SECONDS')
     login_lock_seconds: int = Field(default=300, alias='LOGIN_LOCK_SECONDS')
     login_max_tracked_keys: int = Field(default=10000, alias='LOGIN_MAX_TRACKED_KEYS')
+    trust_proxy_headers: bool = Field(default=False, alias='TRUST_PROXY_HEADERS')
 
     @property
     def cors_origin_list(self) -> list[str]:

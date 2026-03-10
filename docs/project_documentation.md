@@ -1,7 +1,7 @@
 # CorpBoard 프로젝트 문서
 
 작성일: 2026-02-28  
-최종 업데이트: 2026-03-02  
+최종 업데이트: 2026-03-10  
 대상 프로젝트: `free-board-vite`
 
 참고 문서:
@@ -28,6 +28,7 @@
 3. 역할(Role): `USER / STAFF / ADMIN`
 4. 로그인 후 세션 유지(JWT + 프론트 localStorage)
 5. 마이페이지: 내 정보, 비밀번호 변경, 탈퇴, 통계(로그인 횟수/내 글/내 댓글)
+6. 로그인 제한/감사 로그 IP는 기본적으로 소켓 IP 사용, 프록시 헤더 신뢰는 `TRUST_PROXY_HEADERS` 설정으로 제어
 
 ### 2.2 게시판/게시글/댓글/첨부
 
@@ -375,6 +376,7 @@ LOGIN_MAX_ATTEMPTS=5
 LOGIN_ATTEMPT_WINDOW_SECONDS=300
 LOGIN_LOCK_SECONDS=300
 LOGIN_MAX_TRACKED_KEYS=10000
+TRUST_PROXY_HEADERS=false
 ```
 
 ---

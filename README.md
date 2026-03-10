@@ -66,6 +66,7 @@ npm run dev -- --port 5173
 2. 로그인: `POST /api/auth/login`
 3. 로그인은 **가입된 계정만 가능**
 4. 기존 자동 계정 생성 기능은 제거됨
+5. 로그인 제한/감사 로그 IP는 기본적으로 소켓 IP 기준이며, 리버스 프록시 환경에서는 `TRUST_PROXY_HEADERS=true` 설정 시 `X-Forwarded-For`를 신뢰
 
 초기 관리자 시드 계정:
 
@@ -143,4 +144,5 @@ LOGIN_MAX_ATTEMPTS=5
 LOGIN_ATTEMPT_WINDOW_SECONDS=300
 LOGIN_LOCK_SECONDS=300
 LOGIN_MAX_TRACKED_KEYS=10000
+TRUST_PROXY_HEADERS=false
 ```

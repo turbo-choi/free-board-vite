@@ -4,6 +4,7 @@ from fastapi import Request
 from sqlalchemy import select
 
 from app.core.database import AsyncSessionLocal
+from app.core.request_meta import get_client_ip
 from app.core.security import TokenDecodeError, decode_access_token
 from app.models.audit_log import AuditLog
 from app.models.user import User
@@ -25,16 +26,6 @@ def _parse_bearer_token(header_value: str | None) -> str | None:
     return token or None
 
 
-def _extract_ip(request: Request) -> str | None:
-    forwarded_for = request.headers.get('x-forwarded-for')
-    if forwarded_for:
-        return forwarded_for.split(',')[0].strip()
-    client = request.client
-    if client and client.host:
-        return client.host
-    return None
-
-
 async def write_audit_log(
     request: Request,
     *,
@@ -48,7 +39,7 @@ async def write_audit_log(
     method = request.method.upper().strip()[:10]
     path = request.url.path.strip()[:255]
     user_agent = (request.headers.get('user-agent') or '').strip()[:300] or None
-    ip_address = (_extract_ip(request) or '').strip()[:64] or None
+    ip_address = get_client_ip(request)
 
     user_id: int | None = None
     user_email: str | None = None

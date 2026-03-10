@@ -1,36 +1,41 @@
 # Requirement
 
 ## FR (Functional Requirements)
-1. 대시보드의 `Quick Links` 영역은 `Recent Notices`처럼 제목과 목록 영역이 분리되어 보여야 한다.
-2. 퀵 링크 샘플 항목은 클릭 가능한 링크로 표시되어야 한다.
-3. 퀵 링크 샘플 항목의 링크 URL은 모두 `https://www.google.com`으로 연결되어야 한다.
+1. `POST /api/auth/signup`은 이미 존재하는 이메일 계정(비밀번호 해시 유무와 무관)을 재사용/재활성화하지 않고 `409 EMAIL_ALREADY_EXISTS`로 거부해야 한다.
+2. 로그인 시도 제한 키 생성에 사용되는 클라이언트 IP는 기본적으로 `request.client.host`를 사용해야 한다.
+3. 감사 로그 IP 기록도 기본적으로 `request.client.host`를 사용해야 하며, 프록시 헤더 신뢰는 명시 설정으로만 허용해야 한다.
+4. `TRUST_PROXY_HEADERS` 환경 변수를 추가해 운영 환경에서 프록시 체인 사용 여부를 제어할 수 있어야 한다.
 
 ## NFR (Non-Functional Requirements)
-1. 기존 대시보드 반응형 레이아웃(`xl` 3열 구성)을 유지한다.
-2. 다크/화이트 모드에서 기존 토큰 기반 스타일과 충돌이 없어야 한다.
-3. 타입스크립트 빌드가 통과해야 한다.
+1. 기존 인증 API 계약(`signup/login/me`)과 권한 모델은 유지한다.
+2. 변경은 백엔드 보안 경계(인증/감사) 중심의 최소 범위 패치로 제한한다.
+3. 백엔드 컴파일 스모크(`python3 -m compileall app`)가 통과해야 한다.
 
 ## Scope
 - 포함:
-  - 프론트엔드 대시보드 퀵 링크 UI 구조 변경
-  - 퀵 링크 샘플 항목의 링크 URL 반영
+  - `backend/app/api/auth.py` 회원가입 로직 강화
+  - `backend/app/services/auth_throttle.py` 입력 키 신뢰 경계 보강(호출부 기준)
+  - `backend/app/services/audit_logger.py` IP 추출 정책 강화
+  - `backend/app/core/config.py`, `backend/.env.example`, `README.md`, `docs/project_documentation.md` 설정/운영 문서 반영
 - 제외:
-  - 백엔드/API 변경
-  - 메뉴/권한/통계 기능 변경
+  - JWT 저장 매체(localStorage -> HttpOnly Cookie) 변경
+  - 신규 비밀번호 재설정(이메일 인증) 기능 추가
+  - 프론트엔드 라우팅/화면 구조 변경
 
 ## Constraints
-1. 변경은 최소 범위로 수행한다.
-2. 기존 `DashboardPage`의 다른 카드/공지 목록 동작은 유지한다.
-3. 링크는 외부 사이트로 이동 가능하도록 구현한다.
+1. 비밀값 하드코딩 없이 환경 변수 기반 설정만 사용한다.
+2. 보호 API의 기존 권한 체크 흐름은 변경하지 않는다.
+3. 기존 운영 데이터 및 시드 보호 정책은 유지한다.
 
 ## Acceptance
-1. 대시보드에서 `Quick Links` 제목이 목록 컨테이너와 분리되어 보인다.
-2. 각 샘플 링크 클릭 시 `google.com`으로 이동한다.
-3. `cd frontend && npm run build`가 성공한다.
+1. 기존 이메일로 `/api/auth/signup` 요청 시 항상 `EMAIL_ALREADY_EXISTS`를 반환한다.
+2. 기본 설정(`TRUST_PROXY_HEADERS=false`)에서 임의의 `X-Forwarded-For` 헤더로 로그인 쓰로틀 키를 우회할 수 없다.
+3. 기본 설정에서 감사 로그의 IP는 헤더가 아닌 직접 클라이언트 IP 기준으로 기록된다.
+4. `cd backend && source .venv/bin/activate && python3 -m compileall app`가 성공한다.
 
 ## Risks
-1. 외부 링크 이동 시 현재 탭 이탈이 발생할 수 있다.
-2. 스타일 클래스 변경 시 카드 간 간격/정렬이 미세하게 달라질 수 있다.
+1. 기존에 `password_hash IS NULL` 계정을 회원가입으로 복구하던 내부 운영 절차가 있었다면 영향이 발생할 수 있다.
+2. 프록시 기반 운영 환경에서 `TRUST_PROXY_HEADERS=true`를 설정하지 않으면 실제 사용자 IP가 아닌 프록시 IP가 기록될 수 있다.
 
 ## Changes
-- 2026-03-06: 대시보드 퀵 링크 UI 분리 및 샘플 URL 통일 요구사항 추가.
+- 2026-03-10: 회원가입 계정 탈취 가능성 차단 및 프록시 헤더 신뢰 경계 강화 요구사항 추가.

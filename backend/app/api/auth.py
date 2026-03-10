@@ -3,6 +3,7 @@ from sqlalchemy import select
 
 from app.core.deps import CurrentUserDep, SessionDep
 from app.core.exceptions import AppException
+from app.core.request_meta import get_client_ip
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.user import User, UserRole
 from app.schemas.auth import LoginRequest, LoginResponse, SignupRequest
@@ -22,29 +23,20 @@ async def signup(payload: SignupRequest, session: SessionDep) -> LoginResponse:
     email = payload.email.lower().strip()
     existing = await session.scalar(select(User).where(User.email == email))
 
-    if existing is None:
-        user = User(
-            name=payload.name.strip(),
-            email=email,
-            role=UserRole.USER,
-            is_active=True,
-            password_hash=hash_password(payload.password),
-            login_count=1,
-        )
-        session.add(user)
-        await session.commit()
-        await session.refresh(user)
-    else:
-        if existing.password_hash:
-            raise AppException('Email already exists', 'EMAIL_ALREADY_EXISTS', 409)
-        existing.name = payload.name.strip()
-        existing.password_hash = hash_password(payload.password)
-        existing.is_active = True
-        if existing.login_count == 0:
-            existing.login_count = 1
-        await session.commit()
-        await session.refresh(existing)
-        user = existing
+    if existing is not None:
+        raise AppException('Email already exists', 'EMAIL_ALREADY_EXISTS', 409)
+
+    user = User(
+        name=payload.name.strip(),
+        email=email,
+        role=UserRole.USER,
+        is_active=True,
+        password_hash=hash_password(payload.password),
+        login_count=1,
+    )
+    session.add(user)
+    await session.commit()
+    await session.refresh(user)
 
     token = create_access_token(str(user.id), user.role.value)
     return LoginResponse(user=UserOut.model_validate(user), token=token)
@@ -53,9 +45,7 @@ async def signup(payload: SignupRequest, session: SessionDep) -> LoginResponse:
 @router.post('/login', response_model=LoginResponse)
 async def login(payload: LoginRequest, session: SessionDep, request: Request) -> LoginResponse:
     email = payload.email.lower().strip()
-    forwarded_for = request.headers.get('x-forwarded-for', '')
-    client_ip = forwarded_for.split(',')[0].strip() if forwarded_for else (request.client.host if request.client else '')
-    throttle_key = build_login_throttle_key(email, client_ip)
+    throttle_key = build_login_throttle_key(email, get_client_ip(request) or '')
 
     retry_after = await check_login_allowed(throttle_key)
     if retry_after is not None:
