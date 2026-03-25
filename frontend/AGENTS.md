@@ -28,7 +28,9 @@
   - 401 공통 처리는 axios interceptor + unauthorized handler 패턴을 유지
 
 ## Testing Strategy
-- 현재 별도 자동 테스트 스위트는 없다. 아래 검증을 기본으로 수행한다.
+- 기본 자동 테스트는 `Vitest + Testing Library`를 사용한다.
+- 단위/컴포넌트 테스트:
+  - `cd frontend && npm test`
 - 타입/빌드 검증:
   - `cd frontend && npm run build`
 - 로컬 실행 검증:

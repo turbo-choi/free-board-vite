@@ -30,7 +30,9 @@
 - 시드 정책 변경 시 `services/seed.py`와 `services/seed_snapshot.json`을 함께 검토한다.
 
 ## Testing Strategy
-- 현재 별도 자동 테스트 스위트는 없다. 아래 스모크 검증을 기본으로 수행한다.
+- 기본 자동 테스트는 `pytest`를 사용한다.
+- 단위/서비스/API 테스트:
+  - `cd backend && source .venv/bin/activate && pytest`
 - 컴파일 스모크:
   - `cd backend && source .venv/bin/activate && python3 -m compileall app`
 - 서버 실행 스모크:
