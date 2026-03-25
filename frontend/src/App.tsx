@@ -11,7 +11,7 @@ export default function App() {
     <ThemeProvider>
       <QueryProvider>
         <AuthProvider>
-          <BrowserRouter>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <AppRoutes />
             <Toaster richColors position="top-right" />
           </BrowserRouter>
