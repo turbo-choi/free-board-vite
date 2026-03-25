@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 
@@ -20,11 +20,13 @@ import type { PostListItem } from '@/types/domain'
 export function BoardListPage() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [searchParams, setSearchParams] = useSearchParams()
   const { slug } = useParams()
   const { user } = useAuth()
+  const qFromUrl = searchParams.get('q') ?? ''
 
-  const [qInput, setQInput] = useState('')
-  const [q, setQ] = useState('')
+  const [qInput, setQInput] = useState(qFromUrl)
+  const [q, setQ] = useState(qFromUrl)
   const [sort, setSort] = useState<'latest' | 'view' | 'comment'>('latest')
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
@@ -66,13 +68,22 @@ export function BoardListPage() {
     setFrom('')
     setTo('')
     setPage(1)
+    setSearchParams({}, { replace: true })
     toast.success('필터를 초기화했습니다.')
   }
 
   const handleApplySearch = () => {
+    const nextQuery = qInput.trim()
     setPage(1)
-    setQ(qInput)
+    setQ(nextQuery)
+    setSearchParams(nextQuery ? { q: nextQuery } : {}, { replace: true })
   }
+
+  useEffect(() => {
+    setQInput(qFromUrl)
+    setQ(qFromUrl)
+    setPage(1)
+  }, [qFromUrl, slug])
 
   const columns = useMemo<ColumnDef<PostListItem>[]>(
     () => [

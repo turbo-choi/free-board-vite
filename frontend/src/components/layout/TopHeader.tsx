@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Menu, Moon, PanelLeftClose, PanelLeftOpen, Search, Sun } from 'lucide-react'
 import { toast } from 'sonner'
 
+import type { HeaderSearchContext } from '@/components/layout/headerContext'
 import { ConfirmDialog } from '@/components/feedback/ConfirmDialog'
 import { FadeModal } from '@/components/feedback/FadeModal'
 import { Button } from '@/components/ui/button'
@@ -18,6 +20,7 @@ import { formatApiDate } from '@/lib/datetime'
 
 interface TopHeaderProps {
   title: string
+  searchContext: HeaderSearchContext | null
   isSidebarCollapsed: boolean
   onToggleSidebarCollapse: () => void
   onToggleMobileSidebar: () => void
@@ -25,10 +28,12 @@ interface TopHeaderProps {
 
 export function TopHeader({
   title,
+  searchContext,
   isSidebarCollapsed,
   onToggleSidebarCollapse,
   onToggleMobileSidebar,
 }: TopHeaderProps) {
+  const navigate = useNavigate()
   const { user, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
 
@@ -39,10 +44,15 @@ export function TopHeader({
     nextPassword: '',
     nextPasswordConfirm: '',
   })
+  const [headerSearch, setHeaderSearch] = useState(searchContext?.query ?? '')
 
   const profileQuery = useMyProfileQuery(profileOpen)
   const changePasswordMutation = useChangeMyPasswordMutation()
   const withdrawMutation = useWithdrawMeMutation()
+
+  useEffect(() => {
+    setHeaderSearch(searchContext?.query ?? '')
+  }, [searchContext?.query, searchContext?.targetPath])
 
   async function submitPasswordChange() {
     if (!passwordForm.currentPassword.trim() || !passwordForm.nextPassword.trim()) {
@@ -78,6 +88,21 @@ export function TopHeader({
     }
   }
 
+  function submitHeaderSearch() {
+    if (!searchContext) return
+
+    const params = new URLSearchParams()
+    const query = headerSearch.trim()
+    if (query) {
+      params.set('q', query)
+    }
+
+    navigate({
+      pathname: searchContext.targetPath,
+      search: params.toString() ? `?${params.toString()}` : '',
+    })
+  }
+
   return (
     <>
       <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border/70 bg-background/80 px-4 backdrop-blur md:px-6">
@@ -108,13 +133,23 @@ export function TopHeader({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="relative hidden md:block">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              className="h-10 w-72 rounded-xl border border-border bg-card pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-              placeholder="Search notices, posts..."
-            />
-          </div>
+          {searchContext ? (
+            <div className="relative hidden md:block">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                className="h-10 w-72 rounded-xl border border-border bg-card pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                placeholder={searchContext.placeholder}
+                value={headerSearch}
+                onChange={(event) => setHeaderSearch(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter') return
+                  if (event.nativeEvent.isComposing) return
+                  event.preventDefault()
+                  submitHeaderSearch()
+                }}
+              />
+            </div>
+          ) : null}
 
           <button
             type="button"

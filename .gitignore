@@ -43,3 +43,4 @@ backend/.env
 frontend/.env
 frontend/.env.*
 !backend/.env.example
+.gstack/
