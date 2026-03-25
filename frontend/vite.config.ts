@@ -10,6 +10,8 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
+    allowedHosts: ['bp-asteri.asuscomm.com'],
     port: 5173,
     proxy: {
       '/api': {
@@ -17,5 +19,8 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+  },
+  preview: {
+    host: '0.0.0.0',
   },
 })
